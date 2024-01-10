@@ -10,7 +10,6 @@ public: // makes all following variables public
     float width, height;
     float weight;
     float legs[LEGS_COUNT];
-    int legs;
     float legWidth, legHeight;
     Color colour;
 
@@ -18,14 +17,9 @@ public: // makes all following variables public
     {
         // top
         DrawRectangle(x,y,width,height, colour);
-
-        float spacing = width / legs;
-        float legX = x;
-
-        for (int i = 0; i < legs.count ;i++)
+        for (int i = 0; i < LEGS_COUNT; i++)
         {
-            DrawRectangle(LegX, y, legWidth, legHeight, BROWN);
-                LegX += spacing;
+            DrawRectangle(legs[i], y, legWidth, legHeight, BROWN);
         }
     }
 };
@@ -40,16 +34,17 @@ int main()
 
     Table woodTable;
     woodTable.height = 60.0f;
-    woodTable.width = 40.0f;
+    woodTable.width = 140.0f;
     woodTable.x = screenWidth / 2.0f - woodTable.width/ 2.0f;
     woodTable.y = screenHeight * 0.75f - woodTable.height;
     woodTable.colour = GRAY;
-    woodTable.legs = 4;
     woodTable.legHeight = woodTable.height * 3.0f;
     woodTable.legWidth = 10.0f;
 
-    woodTable.legs[0] = woodTable.x
-    woodTable.legs[1] = w 
+    woodTable.legs[0] = woodTable.x;
+    woodTable.legs[1] = woodTable.x + woodTable.legWidth * 3.0f;
+    woodTable.legs[2] = woodTable.x + woodTable.width - (woodTable.legWidth * 3.0f);
+    woodTable.legs[3] = woodTable.x + woodTable.width - (woodTable.legWidth);
 
 
     const char* sentence = "asgudgywaugd"; // C string, draw text uses c strings instead of string
