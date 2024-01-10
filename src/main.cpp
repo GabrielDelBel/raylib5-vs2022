@@ -1,36 +1,66 @@
 #include "raylib.h"
 #include "Math.h"
 
-Vector2 Seek(Vector2 target, Vector2 position, Vector2 velocity, float speed)
+const int LEGS_COUNT = 4;
+
+ class Table 
 {
-    return Normalize(target - position) * speed - velocity;
-}
+public: // makes all following variables public
+    float x, y;
+    float width, height;
+    float weight;
+    float legs[LEGS_COUNT];
+    int legs;
+    float legWidth, legHeight;
+    Color colour;
+
+    void DrawTable() //Class method can use variables in the class
+    {
+        // top
+        DrawRectangle(x,y,width,height, colour);
+
+        float spacing = width / legs;
+        float legX = x;
+
+        for (int i = 0; i < legs.count ;i++)
+        {
+            DrawRectangle(LegX, y, legWidth, legHeight, BROWN);
+                LegX += spacing;
+        }
+    }
+};
 
 int main()
 {
+
     const int screenWidth = 1280;
     const int screenHeight = 720;
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-    SetTargetFPS(60);
+    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window"); // Command creates window, requires raylib.h
+    SetTargetFPS(60); // sets target fps, uses raylib.h
 
-    float radius = 25.0f;
-    Vector2 position{ screenWidth * 0.5f, screenHeight * 0.5f };
-    Vector2 velocity{ Random(-10.0f, 10.0f), Random(-10.0f, 10.0f) };
+    Table woodTable;
+    woodTable.height = 60.0f;
+    woodTable.width = 40.0f;
+    woodTable.x = screenWidth / 2.0f - woodTable.width/ 2.0f;
+    woodTable.y = screenHeight * 0.75f - woodTable.height;
+    woodTable.colour = GRAY;
+    woodTable.legs = 4;
+    woodTable.legHeight = woodTable.height * 3.0f;
+    woodTable.legWidth = 10.0f;
+
+    woodTable.legs[0] = woodTable.x
+    woodTable.legs[1] = w 
+
+
+    const char* sentence = "asgudgywaugd"; // C string, draw text uses c strings instead of string
 
     while (!WindowShouldClose())
     {
-        float dt = GetFrameTime();
-        Vector2 mouse = GetMousePosition();
-        velocity = velocity + Seek(mouse, position, velocity, 1000.0f) * dt;
-        position = position + velocity * dt;
-
-        if (CheckCollisionPointCircle(mouse, position, radius))
-            break;
 
         BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawText("Don't let the circle touch the cursor!", 10, 10, 20, RED);
-        DrawCircleV(position, radius, RED);
+        ClearBackground(RAYWHITE); //Don't need rgb values if existing colour is written.
+        DrawText(sentence, screenWidth/2.0f, screenHeight/2.0f,20, YELLOW);
+        woodTable.DrawTable();
         EndDrawing();
     }
 
