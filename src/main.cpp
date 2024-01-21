@@ -14,6 +14,7 @@ public: // makes all following variables public
     float legWidth, legHeight;
     Color colour;
     Color red;
+    Color green;
 
     void DrawTable() //Class method can use variables in the class
     {
