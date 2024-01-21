@@ -82,5 +82,17 @@ int main()
 	Platform platform;
 	CreatePlatform(platform);
 
-	cout << "The platform name is " + platform.Name + " The Manufacturers name is " + platform.manufacturer;
+	cout << "The platform name is " + platform.Name + " The Manufacturers name is " + platform.manufacturer << endl;
+	cout << "The number of games with achievements are " + platform.gameCount << endl;
+	for (int i = 0; i < platform.gameCount; i++)
+	{
+		cout << "The name of the game is " + platform.gameArray[i].gameName << endl;
+		cout << "The manufacturer of the game is " + platform.gameArray[i].gameManufacturer << endl;
+		cout << "The number of achievements in this game is " + platform.gameArray[i].achievementCount << endl;
+		for (int j = 0; j < platform.gameCount[i].achievemntCount; j++)
+		{
+
+		}
+		
+	}
 }
