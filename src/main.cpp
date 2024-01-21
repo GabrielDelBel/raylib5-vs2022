@@ -98,7 +98,7 @@ int main()
 		{
 			cout << " The title of the achievement for " + platform.gameArray[i].gameName + " is " + platform.gameArray[i].achievementArray[j].title << endl;
 			cout << "The descrition of the achievement for " + platform.gameArray[i].gameName +  " is " + platform.gameArray[i].achievementArray[j].description << endl;
-			cout << "The score value of the achievement for " + platform.gameArray[i].gameName; + " is "
+			cout << "The score value of the achievement for " + platform.gameArray[i].gameName; +" is ";
 			cout << platform.gameArray[i].achievementArray[j].scoreValue << endl;
 			cout << endl;
 		}
