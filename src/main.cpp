@@ -82,6 +82,7 @@ int main()
 	Platform platform;
 	CreatePlatform(platform);
 
+	cout << endl;
 	cout << "The platform name is " + platform.Name + " The Manufacturers name is " + platform.manufacturer << endl;
 	cout << "The number of games with achievements are ";
 	cout << platform.gameCount << endl;
