@@ -51,7 +51,7 @@ using namespace std;
 	 cin >> game.gameManufacturer;
 	 cout << "Who developed the game?" << endl;
 	 cin >> game.developer;
-	 cout << "How many acheivemnts in this game?" << endl;
+	 cout << "How many achievemnts in this game?" << endl;
 	 cin >> game.achievementCount;
 	 game.achievementArray = new Achievement[game.achievementCount];
 
@@ -67,7 +67,7 @@ using namespace std;
 	 cin >> platform.Name;
 	 cout << "What manufacturer made the platform?" << endl;
 	 cin >> platform.manufacturer;
-	 cout << "How many games have achivements?" << endl;
+	 cout << "How many games have achievements?" << endl;
 	 cin >> platform.gameCount;
 	 platform.gameArray = new Game[platform.gameCount];
 
@@ -83,7 +83,7 @@ int main()
 	CreatePlatform(platform);
 
 	cout << endl;
-	cout << "The platform name is " + platform.Name + " The Manufacturers name is " + platform.manufacturer << endl;
+	cout << "The platform name is " + platform.Name + " The Manufacturer's name is " + platform.manufacturer << endl;
 	cout << "The number of games with achievements are ";
 	cout << platform.gameCount << endl;
 	cout << endl;
