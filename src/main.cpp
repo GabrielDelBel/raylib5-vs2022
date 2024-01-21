@@ -16,7 +16,7 @@ using namespace std;
  
  struct Game
  {
-	 string name;
+	 string gameName;
 	 string manufacturer;
 	 string developer;
 
@@ -25,11 +25,22 @@ using namespace std;
 
  struct Platform 
  {
-	 string name;
+	 string Name;
 	 string manufacturer;
 	 Game* Game = nullptr; // game pointer named game = null pointer for now
 
  };
+
+ void CreatePlatform(Platform& platform)
+ {
+	 int numGames;
+	 cout << "What platform is the achievement for" << endl;
+	 cin >> platform.Name;
+	 cout << "What manufacturer made the platform?" << endl;
+	 cin >> platform.manufacturer;
+
+
+ }
 
 int main()
 {
