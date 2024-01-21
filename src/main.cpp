@@ -96,7 +96,8 @@ int main()
 		cout << endl;
 		for (int j = 0; j < platform.gameArray[i].achievementCount; j++)
 		{
-			cout << "Achievement" + (j + 1) << endl;
+			cout << "Achievement ";
+			cout << (j+1) << endl;
 			cout << "The title of the achievement for " + platform.gameArray[i].gameName + " is " + platform.gameArray[i].achievementArray[j].title << endl;
 			cout << "The descrition of the achievement for " + platform.gameArray[i].gameName +  " is " + platform.gameArray[i].achievementArray[j].description << endl;
 			cout << "The score value of the achievement for " + platform.gameArray[i].gameName + " is ";
