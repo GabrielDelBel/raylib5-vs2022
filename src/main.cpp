@@ -41,8 +41,16 @@ using namespace std;
 	 cin >> platform.manufacturer;
 	 cout << "How many games have achivements?" << endl;
 	 cin >> platform.gameCount;
-	 int* gameCount[platform.gameCount] = new int[];
+	 platform.Game = new Game[platform.gameCount];
 
+	 for (int i = 0; i < 5; i++)
+	 {
+		 CreateGames(platform.Game);
+	 }
+ }
+
+ void CreateGames(Game& game)
+ {
 
  }
 
