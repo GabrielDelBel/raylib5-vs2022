@@ -17,7 +17,7 @@ using namespace std;
  struct Game
  {
 	 string gameName;
-	 string manufacturer;
+	 string gameManufacturer;
 	 string developer;
 	 int achievementCount = 0;
 
@@ -54,7 +54,7 @@ using namespace std;
 	 cout << "What's the name of the game?" << endl;
 	 cin >> game.gameName;
 	 cout << "Who manufactured the game?" << endl;
-	 cin >> game.manufacturer;
+	 cin >> game.gameManufacturer;
 	 cout << "Who developed the game?" << endl;
 	 cin >> game.developer;
 	 cout << "How many acheivemnts in this game?" << endl;
@@ -69,10 +69,18 @@ using namespace std;
 
  void CreateAchievements(Achievement& achievement)
  {
-
+	 cout << "What's the title of the achievement?" << endl;
+	 cin >> achievement.title;
+	 cout << "What's the discription of the achievement?" << endl;
+	 cin >> achievement.description;
+	 cout << "What's the score of the achievement of the achievement?" << endl;
+	 cin >> achievement.scoreValue;
  }
 
 int main()
 {
+	Platform platform;
+	CreatePlatform(platform);
 
+	cout << "The platform name is " + platform.Name + " The Manufacturers name is " + platform.manufacturer;
 }
