@@ -4,6 +4,7 @@
 
  struct Achievement
  {
+	 cstring title;
 
  };
  
