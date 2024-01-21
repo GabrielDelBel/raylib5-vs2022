@@ -1,10 +1,12 @@
 #include "raylib.h"
 #include "Math.h"
 #include<iostream>
+#include "string"
+
 
  struct Achievement
  {
-	 cstring title;
+	 string title;
 
  };
  
