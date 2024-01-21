@@ -84,14 +84,20 @@ int main()
 
 	cout << "The platform name is " + platform.Name + " The Manufacturers name is " + platform.manufacturer << endl;
 	cout << "The number of games with achievements are " + platform.gameCount << endl;
+	cout << endl;
 	for (int i = 0; i < platform.gameCount; i++)
 	{
 		cout << "The name of the game is " + platform.gameArray[i].gameName << endl;
 		cout << "The manufacturer of the game is " + platform.gameArray[i].gameManufacturer << endl;
+		cout << "The developer of the game is " + platform.gameArray[i].developer << endl;
 		cout << "The number of achievements in this game is " + platform.gameArray[i].achievementCount << endl;
-		for (int j = 0; j < platform.gameCount[i].achievemntCount; j++)
+		cout << endl;
+		for (int j = 0; j < platform.gameArray[i].achievementCount; j++)
 		{
-
+			cout << "The title of the achievement for " + platform.gameArray[i].gameName + " is " + platform.gameArray[i].achievementArray[j].title << endl;
+			cout << "The descrition of the achievement for " + platform.gameArray[i].gameName +  " is " + platform.gameArray[i].achievementArray[j].description << endl;
+			cout << "The score value of the achievement" + platform.gameArray[i].gameName + " is " + "Placeholder until I figure out how to cast int to string" << endl;
+			cout << endl;
 		}
 		
 	}
