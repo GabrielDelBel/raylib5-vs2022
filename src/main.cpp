@@ -19,16 +19,16 @@ using namespace std;
 	 string gameName;
 	 string manufacturer;
 	 string developer;
-	 int achievementCount
+	 int achievementCount = 0;
 
-	 Achievement* achievevementArray = nullptr;
+	 Achievement* achievementArray = nullptr;
  };
 
  struct Platform 
  {
 	 string Name;
 	 string manufacturer;
-	 int gameCount;
+	 int gameCount = 0;
 	 Game* gameArray = nullptr; // game pointer named game = null pointer for now
 
  };
@@ -59,11 +59,11 @@ using namespace std;
 	 cin >> game.developer;
 	 cout << "How many acheivemnts in this game?" << endl;
 	 cin >> game.achievementCount;
-	 game.achievementArray = new Game[game.achievementCount];
+	 game.achievementArray = new Achievement[game.achievementCount];
 
 	 for (int i = 0; i < game.achievementCount; i++)
 	 {
-		 CreateGames(game.achievementArray[i]);
+		 CreateAchievements(game.achievementArray[i]);
 	 }
  }
 
