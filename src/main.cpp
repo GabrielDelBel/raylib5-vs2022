@@ -33,20 +33,14 @@ using namespace std;
 
  };
 
- void CreatePlatform(Platform& platform)
+ void CreateAchievements(Achievement& achievement)
  {
-	 cout << "What platform is the achievement for?" << endl;
-	 cin >> platform.Name;
-	 cout << "What manufacturer made the platform?" << endl;
-	 cin >> platform.manufacturer;
-	 cout << "How many games have achivements?" << endl;
-	 cin >> platform.gameCount;
-	 platform.gameArray = new Game[platform.gameCount];
-
-	 for (int i = 0; i < platform.gameCount; i++)
-	 {
-		 CreateGames(platform.gameArray[i]);
-	 }
+	 cout << "What's the title of the achievement?" << endl;
+	 cin >> achievement.title;
+	 cout << "What's the discription of the achievement?" << endl;
+	 cin >> achievement.description;
+	 cout << "What's the score of the achievement of the achievement?" << endl;
+	 cin >> achievement.scoreValue;
  }
 
  void CreateGames(Game& game)
@@ -67,14 +61,20 @@ using namespace std;
 	 }
  }
 
- void CreateAchievements(Achievement& achievement)
+ void CreatePlatform(Platform& platform)
  {
-	 cout << "What's the title of the achievement?" << endl;
-	 cin >> achievement.title;
-	 cout << "What's the discription of the achievement?" << endl;
-	 cin >> achievement.description;
-	 cout << "What's the score of the achievement of the achievement?" << endl;
-	 cin >> achievement.scoreValue;
+	 cout << "What platform is the achievement for?" << endl;
+	 cin >> platform.Name;
+	 cout << "What manufacturer made the platform?" << endl;
+	 cin >> platform.manufacturer;
+	 cout << "How many games have achivements?" << endl;
+	 cin >> platform.gameCount;
+	 platform.gameArray = new Game[platform.gameCount];
+
+	 for (int i = 0; i < platform.gameCount; i++)
+	 {
+		 CreateGames(platform.gameArray[i]);
+	 }
  }
 
 int main()
