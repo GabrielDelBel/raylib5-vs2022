@@ -27,6 +27,7 @@ using namespace std;
  {
 	 string Name;
 	 string manufacturer;
+	 int gameCount;
 	 Game* Game = nullptr; // game pointer named game = null pointer for now
 
  };
@@ -34,10 +35,13 @@ using namespace std;
  void CreatePlatform(Platform& platform)
  {
 	 int numGames;
-	 cout << "What platform is the achievement for" << endl;
+	 cout << "What platform is the achievement for?" << endl;
 	 cin >> platform.Name;
 	 cout << "What manufacturer made the platform?" << endl;
 	 cin >> platform.manufacturer;
+	 cout << "How many games have achivements?" << endl;
+	 cin >> platform.gameCount;
+	 int* gameCount[platform.gameCount] = new int[];
 
 
  }
