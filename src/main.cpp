@@ -27,7 +27,6 @@ int main()
     const int screenWidth = 1280;
     const int screenHeight = 720;
     Vector2 centre{ screenWidth * 0.5f, screenHeight * 0.5f };
-    Vector2 enemy = centre;
     Vector2 player = centre;
     float playerSpeed = 500.0f;
     float playerRadius = 50.0f;
@@ -35,15 +34,16 @@ int main()
     float enemyRadius = 75.0f;
 
     std::vector<Enemy> enemies;
-    Enemy enemy1, enemy2, enemy3, enemy4;
-    enemy1.position = Vector2{ screenWidth * 0.1f, screenHeight * 0.1f };
-    enemy2.position = Vector2{ screenWidth * 0.9f, screenHeight * 0.1f };
-    enemy3.position = Vector2{ screenWidth * 0.9f, screenHeight * 0.9f };
-    enemy4.position = Vector2{ screenWidth * 0.1f, screenHeight * 0.9f };
-    enemies.push_back(enemy1);
-    enemies.push_back(enemy2);
-    enemies.push_back(enemy3);
-    enemies.push_back(enemy4);
+   
+    enemies.push_back({});
+    enemies.push_back({});
+    enemies.push_back({});
+    enemies.push_back({});
+
+    enemies[0].position = Vector2{screenWidth * 0.1f, screenHeight * 0.1f};
+    enemies[1].position = Vector2{ screenWidth * 0.9f, screenHeight * 0.1f };
+    enemies[2].position = Vector2{ screenWidth * 0.9f, screenHeight * 0.9f };
+    enemies[3].position = Vector2{ screenWidth * 0.1f, screenHeight * 0.9f };
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
     SetTargetFPS(60);
@@ -101,13 +101,7 @@ int main()
 
         DrawCircleV(enemy, enemyRadius, { 255, 0, 0, a });
         DrawCircleV(player, playerRadius, playerColor);
-        // Proof of concept:
-        //unsigned char a1 = fabsf(sinf(tt)) * 255.0f;
-        //unsigned char a2 = (sinf(tt) * 0.5f + 0.5f) * 255.0f;
-        //Color enemy1 = { 255, 0, 0, a1 };
-        //Color enemy2 = { 255, 0, 0, a2 };
-        //DrawCircleV({ screenWidth * 0.25f, screenHeight * 0.5f }, 125.0f, enemy1);
-        //DrawCircleV({ screenWidth * 0.75f, screenHeight * 0.5f }, 125.0f, enemy2);
+        
         EndDrawing();
     }
 
