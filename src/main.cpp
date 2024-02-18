@@ -34,12 +34,14 @@ struct Character
 
 void StartingWeapons()
 {
-    weapon1.name = "Memes";
+    weapon1.name = "Bronze Sword";
     weapon1.damage = 45;
-    weapon2.name = "Iron Sword";
+    weapon2.name = "Steel Sword";
     weapon2.damage = 85;
     weapon3.name = "Adamantium Sword";
     weapon3.damage = 125;
+    specialAbility
+    
 }
 
 void CreateCharacter(Character &character)
