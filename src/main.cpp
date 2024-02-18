@@ -17,25 +17,15 @@ struct Enemy
 // :: is the "scope-resolution" operator. It resolves between different names
 float Enemy::baseHealth = 100.0f;
 
-struct Player
-{
-    Player()
-    {
-        health = baseHealth;
-    }
-
-    float health;
-    static float baseHealth;
-};
-
-float Player::baseHealth;
-
 // "Forward-declaration" (just like static variables, we can have function declarations, and definitions)
 void StaticExamples();
 
 
-struct Insect
+struct Character
 {
+    string name;
+    string species;
+
     // Common variables for all insects
     int legs;
     int wings;
@@ -53,24 +43,15 @@ struct Insect
 
 // ':' means "inherits from"
 // Bee IS an Insect (has legs, wings, weight and exoskeleton)
-struct Bee : public Insect
+struct Bee 
 {
-    float stingPower;
-    int honeyCount;
-    int pollunCount;
-    bool hasSpicyPersonality;
-    string hiveName;
+    
 };
 
 // Grasshopper IS an Insect (has legs, wings, weight and exoskeleton)
-struct Grasshopper : public Insect
+struct Grasshopper 
 {
-    float jumpHeight;
-    float jumpDistance;
-    string sound;
-    bool dismembersBugs;
-    bool eatsMate;
-    int killCount;
+    
 };
 
 void Inhertiance();
