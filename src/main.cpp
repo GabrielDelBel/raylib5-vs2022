@@ -4,6 +4,24 @@
 #include <string>
 using namespace std;
 
+struct Armor
+{
+    string name;
+    string discription;
+    int armorValue;
+};
+
+struct Weapon
+{
+    string name;
+    int damage;
+    string specialAbility[5];
+};
+
+Weapon weapon1;
+Weapon weapon2;
+Weapon weapon3;
+
 struct Character
 {
     string name;
@@ -14,26 +32,14 @@ struct Character
     Armor Armor;
 };
 
-struct Weapon 
-{
-    string name;
-    int damage;
-    string specialAbility[5];
-};
-
-Weapon weapon1;
-
-
-struct Armor
-{
-    string name;
-    string discription;
-    int armorValue;
-};
-
 void StartingWeapons()
 {
     weapon1.name = "Memes";
+    weapon1.damage = 45;
+    weapon2.name = "Iron Sword";
+    weapon2.damage = 85;
+    weapon3.name = "Adamantium Sword";
+    weapon3.damage = 125;
 }
 
 void CreateCharacter(Character &character)
@@ -58,6 +64,7 @@ void CreateCharacter(Character &character)
 
 int main()
 {
+    StartingWeapons();
     cout << "Welcome to the character creator." << endl;
     Character character1;
     CreateCharacter(character1);
