@@ -52,8 +52,7 @@ void Inhertiance();
 
 int main()
 {
-    //StaticExamples();
-    Inhertiance();
+  cout << "Welcome to the character creator." << '/n'
 
     return 0;
 }
