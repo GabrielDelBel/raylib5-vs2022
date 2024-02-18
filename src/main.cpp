@@ -46,13 +46,21 @@ struct Armor
     int armorValue;
 };
 
-void Inhertiance();
+void CreatePlayer()
+{
+
+
+}
 
 
 
 int main()
 {
-  cout << "Welcome to the character creator." << '/n'
+    cout << "Welcome to the character creator." << endl;
+    Character character1;
+    cout << "Please enter your character's name" << endl;
+    cin << character1.name
+    
 
     return 0;
 }
