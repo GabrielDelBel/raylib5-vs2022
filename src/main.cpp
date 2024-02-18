@@ -25,33 +25,25 @@ struct Character
 {
     string name;
     string species;
+    string backstory;
+    int startingHealth;
+    Weapon weapon;
+    Armor Armor;
+};
 
-    // Common variables for all insects
-    int legs;
-    int wings;
-    float weight;
-    float exoskeleton;
+struct Weapon 
+{
     string name;
-    string type;
-
-    // Common functions for all insects
-    void Name()
-    {
-        cout << "Hello I'm " << name << " the " << type << endl;
-    }
+    int damage;
+    string specialAbility[5];
 };
 
-// ':' means "inherits from"
-// Bee IS an Insect (has legs, wings, weight and exoskeleton)
-struct Bee 
-{
-    
-};
 
-// Grasshopper IS an Insect (has legs, wings, weight and exoskeleton)
-struct Grasshopper 
+struct Armor
 {
-    
+    string name;
+    string discription;
+    int armorValue;
 };
 
 void Inhertiance();
@@ -68,17 +60,7 @@ int main()
 
 void Inhertiance()
 {
-    Grasshopper gary;
-
-    gary.name = "Gary";
-    gary.type = "Grasshopper";
-
-    Bee barry;
-    barry.name = "Barry";
-    barry.type = "Bee";
-
-    gary.Name();
-    barry.Name();
+    
 }
 
 // Function definition
@@ -143,17 +125,3 @@ void FunctionPointerExample()
     // We can store a function like any other variable, and then invoke it at our convenience!
     exampleFunctionPtr(1, 1.f);
 }
-
-//const int screenWidth = 1280;
-//const int screenHeight = 720;
-//InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-//SetTargetFPS(60);
-//
-//while (!WindowShouldClose())
-//{
-//    BeginDrawing();
-//    ClearBackground(RAYWHITE);
-//    EndDrawing();
-//}
-//
-//CloseWindow();
