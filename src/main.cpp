@@ -11,15 +11,25 @@ struct Armour
 {
     string name;
     string discription;
-    int armourValue;
-
-    
+    int armourValue;   
 };
+
+istream& operator>>(istream& in, Armour& words/*non-constant reference cause we're modifying test*/)
+{
+    cout << "Enter the value of test: ";
+    in >> words.armourValue;
+    return in;
+}
+
+ostream& operator<< (ostream& out, const Armour& words)
+{
+    out << words.armourValue;
+    return out;
+}
 
 Armour armour1;
 Armour armour2;
 Armour armour3;
-
 struct Weapon
 {
     string name;
@@ -27,6 +37,21 @@ struct Weapon
     string specialAbility[3] = {"Special effects actiavte twice as often","+10% damage on this weapon","Heal 15Hp every turn"};
     string chosenSpecialAbility;
 };
+
+
+istream& operator>>(istream& in, Weapon& words/*non-constant reference cause we're modifying test*/)
+{
+    cout << "Enter the value of test: ";
+    in >> words;
+    return in;
+}
+
+ostream& operator<< (ostream& out, const Weapon& words)
+{
+    out << words;
+    return out;
+}
+
 
 Weapon weapon1;
 Weapon weapon2;
@@ -48,18 +73,7 @@ struct Character
 
 Character character[3];
 
-istream& operator>>(istream& in, Armour& words/*non-constant reference cause we're modifying test*/)
-{
-    cout << "Enter the value of test: ";
-    in >> words;
-    return in;
-}
 
-ostream& operator<< (ostream& out, const Armour& words)
-{
-    out << words;
-    return out;
-}
 void StartingWeapons()
 {
     weapon1.name = "Bronze Sword";
@@ -321,8 +335,8 @@ void ExtraCharacters(int more, int num)
 int main()
 {
     Armour word;
-    cin >> word;
-    cout << word;
+    cin >> word.name;
+    cout << word.name;
     /*
     cout << "Welcome to the character creator." << endl;
     cout << endl;
