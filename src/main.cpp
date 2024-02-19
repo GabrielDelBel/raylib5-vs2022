@@ -4,8 +4,8 @@
 #include <string>
 using namespace std;
 
-int moreCharacters;
-int numCharacters = 1;
+static int moreCharacters;
+static int numCharacters = 1;
 
 struct Armour
 {
@@ -22,7 +22,7 @@ struct Weapon
 {
     string name;
     int damage;
-    string specialAbility[3] = {"1: Special effects actiavte twice as often","2: +10% damage on this weapon","3: Heal 15Hp every turn"};
+    string specialAbility[3] = {"Special effects actiavte twice as often","+10% damage on this weapon","Heal 15Hp every turn"};
     string chosenSpecialAbility;
 };
 
@@ -43,6 +43,8 @@ struct Character
     string ability;
     bool inputCheck = false;
 };
+
+Character character[3];
 
 void StartingWeapons()
 {
@@ -84,8 +86,10 @@ void CreateCharacter(Character &character)
 {
     cout << "Please enter your character's name" << endl;
     cin >> character.name;
+    cout << endl;
     cout << "Please enter your character's starting health ranging from 100 to 500." << endl;
     cin >> character.startingHealth;
+    cout << endl;
     if (character.startingHealth < 100 || character.startingHealth > 500)
     {
         character.inputCheck = false;
@@ -104,6 +108,7 @@ void CreateCharacter(Character &character)
          } while (character.inputCheck == false);
 
     }
+    cout << endl;
     cout << "Please select a starting weapon by pressing it's corresponding number. " << endl;
     cout << endl;
     StartingWeapons();
@@ -147,11 +152,12 @@ void CreateCharacter(Character &character)
 
     }
 
+    cout << endl;
     cout << "Please select a special ability by pressing it's corresponding number. " << endl;
     cout << endl;
-    cout << character.weapon.specialAbility[0] << endl;
-    cout << character.weapon.specialAbility[1] << endl;
-    cout << character.weapon.specialAbility[2] << endl;
+    cout << "1: " << character.weapon.specialAbility[0] << endl;
+    cout << "2: " << character.weapon.specialAbility[1] << endl;
+    cout << "3: " << character.weapon.specialAbility[2] << endl;
     cin >> character.selection;
 
     if (character.selection != 1 && character.selection != 2 && character.selection != 3)
@@ -189,6 +195,7 @@ void CreateCharacter(Character &character)
 
     }
 
+    cout << endl;
     cout << "Please select a starting armour by pressing it's corresponding number. " << endl;
     cout << endl;
     StartingArmour();
@@ -238,87 +245,93 @@ void CreateCharacter(Character &character)
 
 }
 
+void PrintInformation(Character character)
+{
+    cout << endl;
+    cout << character.name << endl;
+    cout << endl;
+    cout << "HP: " << character.startingHealth << endl;
+    cout << endl;
+    cout << "Weapon Name: " << character.weapon.name << endl;
+    cout << "Weapon Damage: " << character.weapon.damage << endl;
+    cout << "Weapon Special Ability: " << character.weapon.chosenSpecialAbility << endl;
+    cout << endl;
+    cout << "Armour Name: " << character.armour.name << endl;
+    cout << "Armour Value: " << character.armour.armourValue << endl;
+    cout << "Armour Description: " << character.armour.discription << endl;
+    cout << endl;
+}
+
+void ExtraCharacters(int more, int num)
+{
+    if (more == 1)
+    {
+        if (num == 1)
+        {
+            CreateCharacter(character[1]);
+            PrintInformation(character[1]);
+            num++;
+
+        }
+        else if (num == 2)
+        {
+            CreateCharacter(character[2]);
+            PrintInformation(character[2]);
+            num++;
+        }
+        numCharacters = num;
+    }
+    else if (more != 0 && more != 1)
+    {
+        bool inputCheck = false;
+
+        do {
+            cout << "Your input wasn't recognised. Please select either 0 or 1" << endl;
+            cin >> moreCharacters;
+
+            if (more != 0 && more != 1)
+            {
+
+            }
+            else
+            {
+                inputCheck = true;
+            }
+
+        } while (inputCheck == false);
+    }
+    
+}
 
 
 int main()
 {
     cout << "Welcome to the character creator." << endl;
-    Character character1;
-    CreateCharacter(character1);
-    cout << character1.name << endl;
-    cout << character1.startingHealth << endl;
-    cout << character1.weapon.name << endl;
-    cout << character1.weapon.damage << endl;
-    cout << character1.weapon.chosenSpecialAbility << endl;
-    cout << character1.armour.name << endl;
-    cout << character1.armour.armourValue << endl;
-    cout << character1.armour.discription << endl;
     cout << endl;
+    
+    CreateCharacter(character[0]);
+    PrintInformation(character[0]);
 
-    while (numCharacters < 3 || moreCharacters == 0)
+    while (numCharacters < 3 )
     {
-        cout << "Would you like to make another character? Please enter 1 for yes and 0 for no.";
+        cout << "Would you like to make another character. Please enter 1 for yes and 0 for no." << endl;
         cin >> moreCharacters;
 
-        if (moreCharacters != 0 && moreCharacters != 1)
+        if (moreCharacters == 0)
         {
-            bool inputCheck = false;
-
-            do {
-                cout << "Your input wasn't recognised. Please select either 0 or 1" << endl;
-                cin >> moreCharacters;
-
-                if (moreCharacters != 0 && moreCharacters != 1)
-                {
-
-                }
-                else
-                {
-                    inputCheck = true;
-                }
-
-            } while (inputCheck == false);
-        }
-        else if (numCharacters == 1)
-        {
-            if (moreCharacters == 1)
-            {
-                Character character2;
-                CreateCharacter(character2);
-                cout << character2.name << endl;
-                cout << character2.startingHealth << endl;
-                cout << character2.weapon.name << endl;
-                cout << character2.weapon.damage << endl;
-                cout << character2.weapon.chosenSpecialAbility << endl;
-                cout << character2.armour.name << endl;
-                cout << character2.armour.armourValue << endl;
-                cout << character2.armour.discription << endl;
-                cout << endl;
-
-                numCharacters++;
-
-            }
+            break;
         }
         else
         {
-            Character character3;
-            CreateCharacter(character3);
-            cout << character3.name << endl;
-            cout << character3.startingHealth << endl;
-            cout << character3.weapon.name << endl;
-            cout << character3.weapon.damage << endl;
-            cout << character3.weapon.chosenSpecialAbility << endl;
-            cout << character3.armour.name << endl;
-            cout << character3.armour.armourValue << endl;
-            cout << character3.armour.discription << endl;
             cout << endl;
-
-            numCharacters++;
+            ExtraCharacters(moreCharacters, numCharacters);
         }
+
     }
 
     if (numCharacters > 1)
     {
+        cout << endl;
         cout << "Would you like to compare characters? Please enter 1 for yes and 0 for no.";
         cin >> moreCharacters;
 
@@ -339,6 +352,13 @@ int main()
                     inputCheck = true;
                 }
             } while (inputCheck == false);
+        }
+
+        if (moreCharacters == 1)
+        {
+
+        }
+
     }
     
     return 0;
