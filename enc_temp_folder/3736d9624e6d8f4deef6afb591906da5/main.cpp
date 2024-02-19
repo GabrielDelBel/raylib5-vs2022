@@ -48,10 +48,10 @@ struct Character
 
 Character character[3];
 
-istream& operator>>(istream& in, Armour& words/*non-constant reference cause we're modifying test*/)
+istream& operator>>(istream& in, Armour& test/*non-constant reference cause we're modifying test*/)
 {
     cout << "Enter the value of test: ";
-    in >> words;
+    in >> test;
     return in;
 }
 
