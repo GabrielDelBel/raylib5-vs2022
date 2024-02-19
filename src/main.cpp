@@ -62,7 +62,7 @@ ostream& operator<< (ostream& out, const Weapon& words)
 int& operator== (Weapon& first, Weapon second)
 {
     int difference;
-    difference = abs(first.damage - second.damage);
+    difference = (first.damage - second.damage);
     return difference;
 }
 
@@ -331,32 +331,34 @@ void ExtraCharacters(int more, int num)
 
 void Comparison(int indexOne, int indexTwo, int defence , int attack)
 {
+    cout << endl;
     if (defence < 0)
     {
-        cout << "Your "<< indexOne <<" character has " << abs(defence) << " more defence than your"<< indexTwo << "character." << endl;
+        cout << "Your "<< indexOne <<" character has " << abs(defence) << " more defence than your "<< indexTwo << " character." << endl;
     }
     else if (defence == 0)
     {
-        cout << "Your " << indexOne << " character has the same amount of defence as your" << indexTwo << "character." << endl;
+        cout << "Your " << indexOne << " character has the same amount of defence as your " << indexTwo << " character." << endl;
     }
     else
     {
-        cout << "Your " << indexTwo << " character has " << (defence) << " more defence than your" << indexOne << "character." << endl;
+        cout << "Your " << indexTwo << " character has " << (defence) << " more defence than your " << indexOne << " character." << endl;
     }
 
 
     if (attack < 0)
     {
-        cout << "Your " << indexOne << " character has " << abs(attack) << " more attack than your" << indexTwo << "character." << endl;
+        cout << "Your " << indexOne << " character has " << abs(attack) << " more attack than your " << indexTwo << " character." << endl;
     }
     else if (attack == 0)
     {
-        cout << "Your " << indexOne << " character has the same amount of attack as your" << indexTwo << "character." << endl;
+        cout << "Your " << indexOne << " character has the same amount of attack as your " << indexTwo << " character." << endl;
     }
     else
     {
-        cout << "Your " << indexTwo << " character has " << (attack) << " more attack than your" << indexOne << "character." << endl;
+        cout << "Your " << indexTwo << " character has " << (attack) << " more attack than your " << indexOne << " character." << endl;
     }
+    cout << endl;
 }
 
 
