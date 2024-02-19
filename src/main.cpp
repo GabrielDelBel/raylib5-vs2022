@@ -27,7 +27,12 @@ ostream& operator<< (ostream& out, const Armour& words)
     return out;
 }
 
-bool& operator== ()
+int& operator== (Armour& first, Armour second)
+{
+    int difference;
+    difference = first.armourValue - second.armourValue;
+    return difference;
+}
 
 Armour armour1;
 Armour armour2;
@@ -52,6 +57,13 @@ ostream& operator<< (ostream& out, const Weapon& words)
 {
     out << words;
     return out;
+}
+
+int& operator== (Weapon& first, Weapon second)
+{
+    int difference;
+    difference = first.damage - second.damage;
+    return difference;
 }
 
 Weapon weapon1;
@@ -334,10 +346,7 @@ void ExtraCharacters(int more, int num)
 
 
 int main()
-{
-    Armour word;
-    cin >> word.name;
-    cout << word.name;
+{ 
     /*
     cout << "Welcome to the character creator." << endl;
     cout << endl;
@@ -368,7 +377,14 @@ int main()
         cout << "Would you like to compare characters? Please enter 1 for yes and 0 for no.";
         cin >> moreCharacters;
 
-        if (moreCharacters != 0 && moreCharacters != 1)
+        if (moreCharacters == 1)
+        {
+            if ()
+            {
+
+            }
+        }
+        else if (moreCharacters != 0 && moreCharacters != 1)
         {
             bool inputCheck = false;
 
@@ -387,15 +403,10 @@ int main()
             } while (inputCheck == false);
         }
 
-        if (moreCharacters == 1)
-        {
-
-        }
-
     }
+    */
     
     return 0;
-    */
 }
 
 
