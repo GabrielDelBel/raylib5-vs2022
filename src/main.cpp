@@ -27,9 +27,12 @@ ostream& operator<< (ostream& out, const Armour& words)
     return out;
 }
 
+bool& operator== ()
+
 Armour armour1;
 Armour armour2;
 Armour armour3;
+
 struct Weapon
 {
     string name;
@@ -37,7 +40,6 @@ struct Weapon
     string specialAbility[3] = {"Special effects actiavte twice as often","+10% damage on this weapon","Heal 15Hp every turn"};
     string chosenSpecialAbility;
 };
-
 
 istream& operator>>(istream& in, Weapon& words/*non-constant reference cause we're modifying test*/)
 {
@@ -51,7 +53,6 @@ ostream& operator<< (ostream& out, const Weapon& words)
     out << words;
     return out;
 }
-
 
 Weapon weapon1;
 Weapon weapon2;
