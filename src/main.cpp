@@ -14,24 +14,25 @@ struct Armour
     int armourValue;   
 };
 
-istream& operator>>(istream& in, Armour& words/*non-constant reference cause we're modifying test*/)
+istream& operator>>(istream& in, Armour& words)
 {
     cout << "Enter the value of test: ";
-    in >> words.armourValue;
+    in >> words;
     return in;
 }
 
 ostream& operator<< (ostream& out, const Armour& words)
 {
-    out << words.armourValue;
+    out << words;
     return out;
 }
 
 int& operator== (Armour& first, Armour second)
 {
     int difference;
-    difference = first.armourValue - second.armourValue;
+    difference = (first.armourValue - second.armourValue);
     return difference;
+    
 }
 
 Armour armour1;
@@ -46,9 +47,8 @@ struct Weapon
     string chosenSpecialAbility;
 };
 
-istream& operator>>(istream& in, Weapon& words/*non-constant reference cause we're modifying test*/)
+istream& operator>>(istream& in, Weapon& words)
 {
-    cout << "Enter the value of test: ";
     in >> words;
     return in;
 }
@@ -62,7 +62,7 @@ ostream& operator<< (ostream& out, const Weapon& words)
 int& operator== (Weapon& first, Weapon second)
 {
     int difference;
-    difference = first.damage - second.damage;
+    difference = abs(first.damage - second.damage);
     return difference;
 }
 
@@ -322,32 +322,46 @@ void ExtraCharacters(int more, int num)
         }
         numCharacters = num;
     }
-    else if (more != 0 && more != 1)
+    else
     {
-        bool inputCheck = false;
 
-        do {
-            cout << "Your input wasn't recognised. Please select either 0 or 1" << endl;
-            cin >> moreCharacters;
-
-            if (more != 0 && more != 1)
-            {
-
-            }
-            else
-            {
-                inputCheck = true;
-            }
-
-        } while (inputCheck == false);
     }
     
+}
+
+void Comparison(int indexOne, int indexTwo, int defence , int attack)
+{
+    if (defence < 0)
+    {
+        cout << "Your "<< indexOne <<" character has " << abs(defence) << " more defence than your"<< indexTwo << "character." << endl;
+    }
+    else if (defence == 0)
+    {
+        cout << "Your " << indexOne << " character has the same amount of defence as your" << indexTwo << "character." << endl;
+    }
+    else
+    {
+        cout << "Your " << indexTwo << " character has " << (defence) << " more defence than your" << indexOne << "character." << endl;
+    }
+
+
+    if (attack < 0)
+    {
+        cout << "Your " << indexOne << " character has " << abs(attack) << " more attack than your" << indexTwo << "character." << endl;
+    }
+    else if (attack == 0)
+    {
+        cout << "Your " << indexOne << " character has the same amount of attack as your" << indexTwo << "character." << endl;
+    }
+    else
+    {
+        cout << "Your " << indexTwo << " character has " << (attack) << " more attack than your" << indexOne << "character." << endl;
+    }
 }
 
 
 int main()
 { 
-    /*
     cout << "Welcome to the character creator." << endl;
     cout << endl;
     
@@ -358,6 +372,26 @@ int main()
     {
         cout << "Would you like to make another character. Please enter 1 for yes and 0 for no." << endl;
         cin >> moreCharacters;
+        
+        if (moreCharacters != 0 && moreCharacters != 1)
+        {
+            bool inputCheck = false;
+
+            do {
+                cout << "Your input wasn't recognised. Please select either 0 or 1" << endl;
+                cin >> moreCharacters;
+
+                if (moreCharacters != 0 && moreCharacters != 1)
+                {
+
+                }
+                else
+                {
+                    inputCheck = true;
+                }
+
+            } while (inputCheck == false);
+        }
 
         if (moreCharacters == 0)
         {
@@ -373,18 +407,13 @@ int main()
 
     if (numCharacters > 1)
     {
+        int defensive;
+        int stronger;
         cout << endl;
         cout << "Would you like to compare characters? Please enter 1 for yes and 0 for no.";
         cin >> moreCharacters;
 
-        if (moreCharacters == 1)
-        {
-            if ()
-            {
-
-            }
-        }
-        else if (moreCharacters != 0 && moreCharacters != 1)
+        if (moreCharacters != 0 && moreCharacters != 1)
         {
             bool inputCheck = false;
 
@@ -403,8 +432,64 @@ int main()
             } while (inputCheck == false);
         }
 
+        if (moreCharacters == 1)
+        {
+            if (numCharacters == 2)
+            {
+                defensive = character[0].armour == character[1].armour;
+                stronger = character[0].weapon == character[1].weapon;
+
+                Comparison(1,2, defensive, stronger);
+
+            }
+            else
+            {
+                cout << "To compare your 1st Character to your 2nd Character Press 1." << endl;
+                cout << "To compare your 2nd Character to your 3rd Character Press 2." << endl;
+                cin >> moreCharacters;
+
+                if (moreCharacters != 1 && moreCharacters != 2)
+                {
+                    bool inputCheck = false;
+
+                    do {
+                        cout << "Your input wasn't recognised. Please select either 0 or 1" << endl;
+                        cin >> moreCharacters;
+
+                        if (moreCharacters != 1 && moreCharacters != 2)
+                        {
+
+                        }
+                        else
+                        {
+                            inputCheck = true;
+                        }
+                    } while (inputCheck == false);
+                }
+
+                if (moreCharacters == 1)
+                {
+                    defensive = character[0].armour == character[1].armour;
+                    stronger = character[0].weapon == character[1].weapon;
+
+                    Comparison(1, 2, defensive, stronger);
+                }
+                else
+                {
+                    defensive = character[1].armour == character[2].armour;
+                    stronger = character[1].weapon == character[2].weapon;
+
+                    Comparison(2, 3, defensive, stronger);
+                }
+
+            }
+        }
+        else
+        {
+
+        }
+
     }
-    */
     
     return 0;
 }
