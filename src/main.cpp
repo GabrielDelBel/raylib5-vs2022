@@ -13,10 +13,7 @@ struct Armour
     string discription;
     int armourValue;
 
-    ostream& operator<< (ostream& out, Armour a)
-    {
-        return out;
-    }
+    
 };
 
 Armour armour1;
@@ -51,6 +48,18 @@ struct Character
 
 Character character[3];
 
+istream& operator>>(istream& in, Armour& test/*non-constant reference cause we're modifying test*/)
+{
+    cout << "Enter the value of test: ";
+    in >> test;
+    return in;
+}
+
+ostream& operator<< (ostream& out, const Armour a)
+{
+    out << a;
+    return out;
+}
 void StartingWeapons()
 {
     weapon1.name = "Bronze Sword";
