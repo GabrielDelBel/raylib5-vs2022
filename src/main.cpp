@@ -12,6 +12,11 @@ struct Armour
     string name;
     string discription;
     int armourValue;
+
+    ostream& operator<< (ostream& out, Armour a)
+    {
+        return out;
+    }
 };
 
 Armour armour1;
