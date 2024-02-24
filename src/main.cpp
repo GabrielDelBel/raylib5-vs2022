@@ -8,7 +8,7 @@ class GameObject
 {
 public:
 
-	void NormalAttack()
+	virtual void NormalAttack()
 	{
 
 	}
