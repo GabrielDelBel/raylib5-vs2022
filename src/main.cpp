@@ -41,7 +41,7 @@ public:
 
 	}
 
-	virtual void SpecialAttack()
+	virtual void TauntPlayer()
 	{
 
 	}
@@ -52,6 +52,11 @@ class Wizard : public Player
 public:
 	string static specialAttackName;
 	int specialAttackAmount;
+	
+	void SpecialAttack()
+	{
+
+	}
 };
 
 class Knight : public Player
@@ -59,6 +64,11 @@ class Knight : public Player
 public:
 	string static specialAttackName;
 	int specialAttackAmount;
+
+	void SpecialAttack()
+	{
+
+	}
 };
 
 class Ork : public Enemy
@@ -66,6 +76,11 @@ class Ork : public Enemy
 public:
 	string static species;
 	int* numTaunts;
+
+	void TauntPlayer()
+	{
+
+	}
 };
 
 class Undead : public Enemy
@@ -73,5 +88,10 @@ class Undead : public Enemy
 public:
 	string static species;
 	int* numTaunts;
+
+	 void TauntPlayer()
+	{
+
+	}
 };
 
