@@ -98,5 +98,17 @@ public:
 	}
 };
 
+int main()
+{
+	Player player;
+	cout << "What is your player's name?" << endl;
+	cin >> player.name;
+	
+
+
+
+
+};
+
 
 
