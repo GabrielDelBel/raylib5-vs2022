@@ -12,6 +12,7 @@ public:
 	{
 
 	}
+	
 };
 
 class Player : public GameObject
@@ -74,12 +75,14 @@ public:
 class Ork : public Enemy
 {
 public:
-	string static species;
+	string species;
 	int* numTaunts;
 
+	
 	void TauntPlayer()
 	{
-
+		species = "Ork";
+		cout << "The ork uses a defaning roar" << endl;
 	}
 };
 
@@ -91,7 +94,9 @@ public:
 
 	 void TauntPlayer()
 	{
-
+		 cout << "The skeleton rattles it bones" << endl;
 	}
 };
+
+
 
