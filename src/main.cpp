@@ -110,7 +110,8 @@ public:
 
 int main()
 {
-	Player *player;
+	GameObject gameObject;
+	Player player;
 	Enemy enemy;
 	cout << "What Class do you want to be?" << endl;
 	cout << "Please enter 1 for Wizard or 2 for Knight" << endl;
