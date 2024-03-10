@@ -68,7 +68,7 @@ class Ork : public Enemy
 {
 public:
 	int randNum;
-	static string species;
+	string static species;
 	string taunts[3] = { "The ork utters a defaning roar","The ork slams their club again the ground", "The ork mocks the player" };
 
 	
