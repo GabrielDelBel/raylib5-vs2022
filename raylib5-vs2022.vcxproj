@@ -13,14 +13,6 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="lib\Debug\glfw.pdb" />
-    <None Include="lib\Debug\raylib.pdb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="lib\Debug\raylib.lib" />
-    <Library Include="lib\Release\raylib.lib" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
