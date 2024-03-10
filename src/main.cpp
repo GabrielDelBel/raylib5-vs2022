@@ -7,7 +7,6 @@ using namespace std;
 class GameObject
 {
 public:
-	int playerChoice;
 	virtual void NormalAttack()
 	{
 
@@ -18,6 +17,8 @@ public:
 class Player : public GameObject
 {
 public:
+	int playerChoice;
+	string playerClass;
 	string name;
 	int health;
 
@@ -75,7 +76,7 @@ public:
 class Ork : public Enemy
 {
 public:
-	string species;
+	string static species;
 	int& randNum;
 	string taunts[3] = { "The ork utters a defaning roar","The ork slams their club again the ground", "The ork mocks the player" };
 
@@ -112,21 +113,63 @@ public:
 	}
 };
 
+
+
 int main()
 {
 	Player player;
 	Enemy enemy;
-	Knight knight;
-	Wizard wizard;
-	Undead undead;
-	Ork ork;
-	cout << "What Species do you want to be?" << endl;
-	cout << "Please endter 1 for Wizard and 2 for Knight" << endl;
-	cin >> player.name;
+	cout << "What Class do you want to be?" << endl;
+	cout << "Please enter 1 for Wizard or 2 for Knight" << endl;
+	do
+	{
+		cin >> player.playerChoice;
+		if (player.playerChoice == 1)
+		{
+			cout << "You selected the Wizard Class." << endl;
+			Wizard wizard;
+			player.playerClass = "Wizard";
+			player.health = 125;
+		}
+		else if (player.playerChoice == 2)
+		{
+			cout << "You selected the Knight Class." << endl;
+			Knight knight;
+			player.playerClass = "Knight";
+			player.health = 200;
+		}
+		else
+		{
+			cout << "You inputted an invalid option. Please enter 1 for Wizard or 2 for Knight." << endl;
+		}
+	} while (player.playerChoice != 1 && player.playerChoice != 2);
+
 	cout << "What is your player's name?" << endl;
 	cin >> player.name;
-	
 
+	cout << "Here's a summary of what you've chosen so far." << endl;
+	cout << "Class: " << player.playerClass << endl;
+	cout << "Name: " << player.name << endl;
+	cout << "Starting HP: " << player.name << endl;
+	
+	cout << "Would you like to watch a battle?" << endl;
+	cout << "Please enter 1 for Yes or 2 for No" << endl;
+	do
+	{
+		cin >> player.playerChoice;
+		if (player.playerChoice == 1)
+		{
+			
+		}
+		else if (player.playerChoice == 2)
+		{
+			
+		}
+		else
+		{
+			cout << "You inputted an invalid option. Please enter 1 for Yes or 2 for No." << endl;
+		}
+	} while (player.playerChoice != 1 && player.playerChoice != 2);
 
 
 
