@@ -67,7 +67,6 @@ public:
 class Ork : public Enemy
 {
 public:
-	static string species;
 	int randNum;
 	string taunts[3] = { "The ork utters a defaning roar","The ork slams their club again the ground", "The ork mocks the player" };
 
@@ -82,7 +81,6 @@ public:
 class Undead : public Enemy
 {
 public:
-	static string species;
 	int randNum;
 	string taunts[3] = { "The zombie lazes around","The zombie disattaches their head and juggles it",
 		"The zombie taunts the player" };
@@ -151,18 +149,18 @@ int main()
 			if (playerChoice == 1)
 			{
 				Ork ork;
-				ork.species = "Ork";
+				//ork.species = "Ork";
 				ork.health = 50;
-				cout << "Name: " << ork.species << endl;
+				//cout << "Name: " << ork.species << endl;
 				cout << "Starting HP: " << ork.health << endl;
 
 			}
 			else 
 			{
 				Undead undead;
-				undead.species = "Ork";
+				//undead.species = "Ork";
 				undead.health = 35;
-				cout << "Name: " << undead.species << endl;
+				//cout << "Name: " << undead.species << endl;
 				cout << "Starting HP: " << undead.health << endl;
 				undead.NormalAttack();
 			}
