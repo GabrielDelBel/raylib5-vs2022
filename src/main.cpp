@@ -7,10 +7,8 @@ using namespace std;
 class GameObject
 {
 public:
-	virtual void NormalAttack()
-	{
-
-	}
+	virtual void NormalAttack() = 0;
+	
 	
 };
 
@@ -159,7 +157,15 @@ int main()
 		cin >> player.playerChoice;
 		if (player.playerChoice == 1)
 		{
-			
+			player.playerChoice = (rand() % 2) + 1;
+			if (player.playerChoice == 1)
+			{
+				Ork ork;
+			}
+			else 
+			{
+				Undead undead;
+			}
 		}
 		else if (player.playerChoice == 2)
 		{
