@@ -7,7 +7,7 @@ using namespace std;
 class GameObject
 {
 public:
-
+	int playerChoice;
 	virtual void NormalAttack()
 	{
 
@@ -76,13 +76,19 @@ class Ork : public Enemy
 {
 public:
 	string species;
-	int* numTaunts;
+	int& randNum;
+	string taunts[3] = { "The ork utters a defaning roar","The ork slams their club again the ground", "The ork mocks the player" };
 
 	
 	void TauntPlayer()
 	{
 		species = "Ork";
-		cout << "The ork uses a defaning roar" << endl;
+		randNum++;
+		if (randNum > 2)
+		{
+			randNum = 0;
+		}
+		cout << taunts[randNum] << endl;
 	}
 };
 
@@ -90,17 +96,33 @@ class Undead : public Enemy
 {
 public:
 	string static species;
-	int* numTaunts;
+	int& randNum;
+	string taunts[3] = { "The zombie lazes around","The zombie disattaches their head and juggles it",
+		"The zombie taunts the player" };
 
 	 void TauntPlayer()
 	{
-		 cout << "The skeleton rattles it bones" << endl;
+		 species = "Zombie";
+		 randNum++;
+		 if (randNum > 2)
+		 {
+			 randNum = 0;
+		 }
+		 cout << taunts[randNum] << endl;
 	}
 };
 
 int main()
 {
 	Player player;
+	Enemy enemy;
+	Knight knight;
+	Wizard wizard;
+	Undead undead;
+	Ork ork;
+	cout << "What Species do you want to be?" << endl;
+	cout << "Please endter 1 for Wizard and 2 for Knight" << endl;
+	cin >> player.name;
 	cout << "What is your player's name?" << endl;
 	cin >> player.name;
 	
