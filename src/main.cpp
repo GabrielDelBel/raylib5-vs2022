@@ -68,7 +68,7 @@ class Ork : public Enemy
 {
 public:
 	int randNum;
-	string static species;
+	static string species;
 	string taunts[3] = { "The ork utters a defaning roar","The ork slams their club again the ground", "The ork mocks the player" };
 
 	
@@ -161,21 +161,22 @@ int main()
 		if (playerChoice == 1)
 		{
 			playerChoice = (rand() % 2) + 1;
+			cout << playerChoice;
 			if (playerChoice == 1)
 			{
 				Ork ork;
-				ork.species = "Ork";
+				//ork.species = "Ork";
 				ork.health = 50;
-				cout << "Name: " << ork.species << endl;
+				//cout << "Name: " << ork.species << endl;
 				cout << "Starting HP: " << ork.health << endl;
 
 			}
 			else 
 			{
 				Undead undead;
-				undead.species = "Undead";
+				//undead.species = "Undead";
 				undead.health = 35;
-				cout << "Name: " << undead.species << endl;
+				//cout << "Name: " << undead.species << endl;
 				cout << "Starting HP: " << undead.health << endl;
 				undead.NormalAttack();
 			}
