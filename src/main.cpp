@@ -25,10 +25,7 @@ public:
 
 	}
 
-	virtual void SpecialAttack()
-	{
-
-	}
+	virtual void SpecialAttack() = 0;
 };
 
 class Enemy : public GameObject
@@ -41,10 +38,8 @@ public:
 
 	}
 
-	virtual void TauntPlayer()
-	{
-
-	}
+	virtual void TauntPlayer() = 0;
+	
 };
 
 class Wizard : public Player
@@ -115,7 +110,7 @@ public:
 
 int main()
 {
-	Player player;
+	Player *player;
 	Enemy enemy;
 	cout << "What Class do you want to be?" << endl;
 	cout << "Please enter 1 for Wizard or 2 for Knight" << endl;
