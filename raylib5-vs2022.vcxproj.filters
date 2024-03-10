@@ -19,4 +19,32 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\raylib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="x64\Debug\main.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="x64\Debug\raylib5-vs2022.exe.recipe" />
+    <None Include="x64\Debug\raylib5-vs2022.pdb" />
+    <None Include="x64\Debug\vc143.idb" />
+    <None Include="x64\Debug\vc143.pdb" />
+    <None Include=".gitignore" />
+    <None Include="lib\Debug\raylib.pdb" />
+    <None Include="lib\Debug\glfw.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="x64\Debug\raylib5-vs2022.log" />
+    <Text Include="x64\Debug\raylib5-vs2022.vcxproj.FileListAbsolute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\Release\raylib.lib" />
+    <Library Include="lib\Debug\raylib.lib" />
+  </ItemGroup>
 </Project>

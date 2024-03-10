@@ -43,7 +43,7 @@ public:
 class Wizard : public Player
 {
 public:
-	string static specialAttackName;
+	static string specialAttackName;
 	int specialAttackAmount;
 	
 	void SpecialAttack()
@@ -55,7 +55,7 @@ public:
 class Knight : public Player
 {
 public:
-	string static specialAttackName;
+	static string specialAttackName;
 	int specialAttackAmount;
 
 	void SpecialAttack()
@@ -67,7 +67,7 @@ public:
 class Ork : public Enemy
 {
 public:
-	string static species;
+	static string species;
 	int randNum;
 	string taunts[3] = { "The ork utters a defaning roar","The ork slams their club again the ground", "The ork mocks the player" };
 
@@ -82,7 +82,7 @@ public:
 class Undead : public Enemy
 {
 public:
-	string static species;
+	static string species;
 	int randNum;
 	string taunts[3] = { "The zombie lazes around","The zombie disattaches their head and juggles it",
 		"The zombie taunts the player" };

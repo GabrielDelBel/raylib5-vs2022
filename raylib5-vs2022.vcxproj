@@ -13,6 +13,30 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Math.h" />
+    <ClInclude Include="include\raylib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="x64\Debug\main.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="lib\Debug\glfw.pdb" />
+    <None Include="lib\Debug\raylib.pdb" />
+    <None Include="x64\Debug\raylib5-vs2022.exe.recipe" />
+    <None Include="x64\Debug\raylib5-vs2022.pdb" />
+    <None Include="x64\Debug\vc143.idb" />
+    <None Include="x64\Debug\vc143.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="x64\Debug\raylib5-vs2022.log" />
+    <Text Include="x64\Debug\raylib5-vs2022.vcxproj.FileListAbsolute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\Debug\raylib.lib" />
+    <Library Include="lib\Release\raylib.lib" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
