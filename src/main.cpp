@@ -61,6 +61,8 @@ public:
 	}
 };
 
+string Wizard::specialAttackName = "Meteor Strike.";
+
 class Knight : public Player
 {
 public:
@@ -70,16 +72,18 @@ public:
 	int SpecialAttack()
 	{
 		specialAttackAmount = (rand() % 35) + 115;
-		cout << " dealt " << specialAttackAmount << "damage to the ";
+		cout << " dealt " << specialAttackAmount << " damage to the ";
 		return specialAttackAmount;
 	}
 };
+
+string Knight::specialAttackName = "Piercing Blade.";
 
 class Ork : public Enemy
 {
 public:
 	static string species;
-	string taunts[3] = { "The ork utters a defaning roar.","The ork slams their club again the ground.", "The ork mocks the player." };
+	string taunts[3] = { "The Ork utters a defaning roar.","The Ork slams their club again the ground.", "The Ork mocks the player." };
 
 	
 	void TauntPlayer()
@@ -90,12 +94,14 @@ public:
 	}
 };
 
+string Ork::species = "Ork";
+
 class Undead : public Enemy
 {
 public:
 	static string species;
-	string taunts[3] = { "The zombie lazes around.","The zombie disattaches their head and juggles it.",
-		"The zombie taunts the player." };
+	string taunts[3] = { "The Undead lazes around.","The Undead disattaches their head and juggles it.",
+		"The Undead taunts the player." };
 
 	 void TauntPlayer()
 	{
@@ -106,14 +112,12 @@ public:
 	}
 };
 
-int health()
-{
-
-}
+string Undead::species = "Undead";
 
 int main()
 {
 	int playerChoice;
+	int seed;
 	string playerClass;
 	Wizard wizard;
 	Knight knight;
@@ -139,6 +143,7 @@ int main()
 			cout << endl;
 			cout << "Class: " << playerClass << endl;
 			cout << "Name: " << wizard.name << endl;
+			seed = (int)wizard.name[0];
 			cout << "Starting HP: " << wizard.health << endl;
 
 		}
@@ -151,10 +156,12 @@ int main()
 			cin >> knight.name;
 			cout << endl;
 			knight.health = 200;
+			cout << endl;
 			cout << "Here's a summary of what you've chosen so far." << endl;
 			cout << endl;
 			cout << "Class: " << playerClass << endl;
 			cout << "Name: " << knight.name << endl;
+			seed = (int)knight.name[0];
 			cout << "Starting HP: " << knight.health << endl;
 			
 		}
@@ -175,61 +182,83 @@ int main()
 		cout << endl;
 		if (playerChoice == 1)
 		{
+			srand(seed);
 			playerChoice = (rand() % 2) + 1;
+
 			if (playerChoice == 1)
 			{
 				Ork ork;
 				ork.health = 500;
-				cout << "Species: Ork" << endl;
+				cout << "Species: " << ork.species << endl;
 				cout << "Starting HP: " << ork.health << endl;
 				cout << endl;
 				if (playerClass == "Wizard")
 				{
 					ork.TauntPlayer();
 					cout << wizard.name;
-					wizard.NormalAttack();
-					cout << "Ork." << endl;
+					ork.health -= wizard.NormalAttack();
+					cout << ork.species << "." << endl;
+					cout << "The " << ork.species << " has " << ork.health << " health remaining." << endl;
 					ork.TauntPlayer();
-					cout << wizard.name;
-					wizard.SpecialAttack();
-					cout << "Ork." << endl;
-					cout << "The Ork";
-					ork.NormalAttack();
+					cout << wizard.name << " used " << wizard.specialAttackName << endl;
+					cout <<  wizard.name;
+					ork.health -= wizard.SpecialAttack();
+					cout << ork.species << "." << endl;
+					cout << "The " << ork.species << " has " << ork.health << " health remaining." << endl;
+					cout << "The " << ork.species;
+					wizard.health -= ork.NormalAttack();
 					cout << wizard.name << "." << endl;
-					cout << "The Ork";
-					ork.NormalAttack();
+					cout << wizard.name << " has " << wizard.health << " health remaining." << endl;
+					cout << "The " << ork.species;
+					wizard.health -= ork.NormalAttack();
 					cout << wizard.name << "." << endl;
+					cout << wizard.name << " has " << wizard.health << " health remaining." << endl;
+					cout << wizard.name << " used " << wizard.specialAttackName << endl;
 					cout << wizard.name;
-					wizard.SpecialAttack();
-					cout << "Ork." << endl;
+					ork.health -= wizard.SpecialAttack();
+					cout << ork.species << "." << endl;
+					cout << "The " << ork.species << " has " << ork.health << " health remaining." << endl;
 					ork.TauntPlayer();
+					cout << wizard.name << " used " << wizard.specialAttackName << endl;
 					cout << wizard.name;
-					wizard.SpecialAttack();
-					cout << "Ork." << endl;
+					ork.health -= wizard.SpecialAttack();
+					cout << ork.species << "." << endl;
+					cout << endl;
+					cout << "You Win!" << endl;
 				}
 				else
 				{
 					ork.TauntPlayer();
 					cout << knight.name;
-					knight.NormalAttack();
-					cout << "Ork." << endl;
+					ork.health -= knight.NormalAttack();
+					cout << ork.species << "." << endl;
+					cout << "The " << ork.species << " has " << ork.health << " health remaining." << endl;
 					ork.TauntPlayer();
+					cout << knight.name << " used " << knight.specialAttackName << endl;
 					cout << knight.name;
-					knight.SpecialAttack();
-					cout << "Ork." << endl;
-					cout << "The Ork";
-					ork.NormalAttack();
+					ork.health -= knight.SpecialAttack();
+					cout << ork.species << "." << endl;
+					cout << "The " << ork.species << " has " << ork.health << " health remaining." << endl;
+					cout << "The " << ork.species;
+					knight.health -= ork.NormalAttack();
 					cout << knight.name << "." << endl;
-					cout << "The Ork";
-					ork.NormalAttack();
+					cout << knight.name << " has " << knight.health << " health remaining." << endl;
+					cout << "The " << ork.species;
+					knight.health -= ork.NormalAttack();
 					cout << knight.name << "." << endl;
+					cout << knight.name << " has " << knight.health << " health remaining." << endl;
+					cout << knight.name << " used " << knight.specialAttackName << endl;
 					cout << knight.name;
-					knight.SpecialAttack();
-					cout << "Ork." << endl;
+					ork.health -= knight.SpecialAttack();
+					cout << ork.species << "." << endl;
+					cout << "The " << ork.species << " has " << ork.health << " health remaining." << endl;
 					ork.TauntPlayer();
+					cout << knight.name << " used " << knight.specialAttackName << endl;
 					cout << knight.name;
-					knight.SpecialAttack();
-					cout << "Ork." << endl;
+					ork.health -= knight.SpecialAttack();
+					cout << ork.species << "." << endl;
+					cout << endl;
+					cout << "You Win!" << endl;
 				}
 				
 				
@@ -239,56 +268,76 @@ int main()
 			{
 				Undead undead;
 				undead.health = 450;
-				cout << "Species: Undead" << endl;
+				cout << "Species: " << undead.species << endl;
 				cout << "Starting HP: " << undead.health << endl;
 				cout << endl;
 				if (playerClass == "Wizard")
 				{
 					undead.TauntPlayer();
 					cout << wizard.name;
-					wizard.NormalAttack();
-					cout << "Undead." << endl;
+					undead.health -= wizard.NormalAttack();
+					cout << undead.species << "." << endl;
+					cout << "The " << undead.species << " has " << undead.health << " health remaining." << endl;
 					undead.TauntPlayer();
+					cout << wizard.name << " used " << wizard.specialAttackName << endl;
 					cout << wizard.name;
-					wizard.SpecialAttack();
-					cout << "Undead." << endl;
-					cout << "The Undead";
-					undead.NormalAttack();
+					undead.health -= wizard.SpecialAttack();
+					cout << undead.species << "." << endl;
+					cout << "The " << undead.species << " has " << undead.health << " health remaining." << endl;
+					cout << "The " << undead.species;
+					wizard.health -= undead.NormalAttack();
 					cout << wizard.name << "." << endl;
-					cout << "The Undead";
-					undead.NormalAttack();
+					cout << wizard.name << " has " << wizard.health << " health remaining." << endl;
+					cout << "The " << undead.species;
+					wizard.health -= undead.NormalAttack();
 					cout << wizard.name << "." << endl;
+					cout << wizard.name << " has " << wizard.health << " health remaining." << endl;
+					cout << wizard.name << " used " << wizard.specialAttackName << endl;
 					cout << wizard.name;
-					wizard.SpecialAttack();
-					cout << "Undead." << endl;
+					undead.health -= wizard.SpecialAttack();
+					cout << undead.species << "." << endl;
+					cout << "The " << undead.species << " has " << undead.health << " health remaining." << endl;
 					undead.TauntPlayer();
+					cout << wizard.name << " used " << wizard.specialAttackName << endl;
 					cout << wizard.name;
-					wizard.SpecialAttack();
-					cout << "Undead." << endl;
+					undead.health -= wizard.SpecialAttack();
+					cout << undead.species << "." << endl;
+					cout << endl;
+					cout << "You Win!" << endl;
 				}
 				else
 				{
 					undead.TauntPlayer();
 					cout << knight.name;
-					knight.NormalAttack();
-					cout << "Undead." << endl;
+					undead.health -= knight.NormalAttack();
+					cout << undead.species << "." << endl;
+					cout << "The " << undead.species << " has " << undead.health << " health remaining." << endl;
 					undead.TauntPlayer();
+					cout << knight.name << " used " << knight.specialAttackName << endl;
 					cout << knight.name;
-					knight.SpecialAttack();
-					cout << "Undead." << endl;
-					cout << "The Undead";
-					undead.NormalAttack();
+					undead.health -= knight.SpecialAttack();
+					cout << undead.species << "." << endl;
+					cout << "The " << undead.species << " has " << undead.health << " health remaining." << endl;
+					cout << "The " << undead.species;
+					knight.health -= undead.NormalAttack();
 					cout << knight.name << "." << endl;
-					cout << "The Undead";
-					undead.NormalAttack();
+					cout << knight.name << " has " << knight.health << " health remaining." << endl;
+					cout << "The " << undead.species;
+					knight.health -= undead.NormalAttack();
 					cout << knight.name << "." << endl;
+					cout << knight.name << " has " << knight.health << " health remaining." << endl;
+					cout << knight.name << " used " << knight.specialAttackName << endl;
 					cout << knight.name;
-					knight.SpecialAttack();
-					cout << "Undead." << endl;
+					undead.health -= knight.SpecialAttack();
+					cout << undead.species << "." << endl;
+					cout << "The " << undead.species << " has " << undead.health << " health remaining." << endl;
 					undead.TauntPlayer();
+					cout << knight.name << " used " << knight.specialAttackName << endl;
 					cout << knight.name;
-					knight.SpecialAttack();
-					cout << "Undead." << endl;
+					undead.health -= knight.SpecialAttack();
+					cout << undead.species << "." << endl;
+					cout << endl;
+					cout << "You Win!" << endl;
 				}
 			}
 		}
