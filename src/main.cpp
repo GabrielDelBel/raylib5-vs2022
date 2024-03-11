@@ -7,7 +7,7 @@ using namespace std;
 class GameObject
 {
 public:
-	virtual void NormalAttack() = 0;
+	virtual int NormalAttack() = 0;
 	
 	
 };
@@ -18,12 +18,15 @@ public:
 	string name;
 	int health;
 
-	void NormalAttack()
+	int NormalAttack()
 	{
-
+		int randNum;
+		randNum = (rand() % 15) + 50;
+		cout << " dealt " << randNum << " damage to the ";
+		return randNum;
 	}
 
-	virtual void SpecialAttack() = 0;
+	virtual int SpecialAttack() = 0;
 };
 
 class Enemy : public GameObject
@@ -31,9 +34,13 @@ class Enemy : public GameObject
 public:
 	int health;
 
-	void NormalAttack()
+	int NormalAttack()
 	{
-
+		int randNum;
+		randNum = (rand() % 35) + 25;
+		cout << " dealt " << randNum << " damage to ";
+		return randNum;
+		
 	}
 
 	virtual void TauntPlayer() = 0;
@@ -46,9 +53,11 @@ public:
 	static string specialAttackName;
 	int specialAttackAmount;
 	
-	void SpecialAttack()
+	int SpecialAttack()
 	{
-
+		specialAttackAmount = (rand() % 25) + 150;
+		cout << " dealt " << specialAttackAmount << " damage to the ";
+		return specialAttackAmount;
 	}
 };
 
@@ -58,22 +67,24 @@ public:
 	static string specialAttackName;
 	int specialAttackAmount;
 
-	void SpecialAttack()
+	int SpecialAttack()
 	{
-		
+		specialAttackAmount = (rand() % 35) + 115;
+		cout << " dealt " << specialAttackAmount << "damage to the ";
+		return specialAttackAmount;
 	}
 };
 
 class Ork : public Enemy
 {
 public:
-	int randNum;
 	static string species;
-	string taunts[3] = { "The ork utters a defaning roar","The ork slams their club again the ground", "The ork mocks the player" };
+	string taunts[3] = { "The ork utters a defaning roar.","The ork slams their club again the ground.", "The ork mocks the player." };
 
 	
 	void TauntPlayer()
 	{
+		int randNum;
 		randNum = (rand() % 3);
 		cout << taunts[randNum] << endl;
 	}
@@ -82,25 +93,30 @@ public:
 class Undead : public Enemy
 {
 public:
-	int randNum;
 	static string species;
-	string taunts[3] = { "The zombie lazes around","The zombie disattaches their head and juggles it",
-		"The zombie taunts the player" };
+	string taunts[3] = { "The zombie lazes around.","The zombie disattaches their head and juggles it.",
+		"The zombie taunts the player." };
 
 	 void TauntPlayer()
 	{
+		 int randNum;
 		 randNum = (rand() % 3);
 		 cout << taunts[randNum] << endl;
 		 
 	}
 };
 
+int health()
+{
 
+}
 
 int main()
 {
 	int playerChoice;
 	string playerClass;
+	Wizard wizard;
+	Knight knight;
 	cout << "Welcome to Gabriel's Battle Simulator." << endl;
 	cout << endl;
 	cout << "What Class do you want to be?" << endl;
@@ -114,7 +130,6 @@ int main()
 		{
 			cout << "You selected the Wizard Class." << endl;
 			cout << endl;
-			Wizard wizard;
 			playerClass = "Wizard";
 			cout << "What is your player's name?" << endl;
 			cin >> wizard.name;
@@ -131,7 +146,6 @@ int main()
 		{
 			cout << "You selected the Knight Class." << endl;
 			cout << endl;
-			Knight knight;
 			playerClass = "Knight";
 			cout << "What is your player's name?" << endl;
 			cin >> knight.name;
@@ -158,27 +172,124 @@ int main()
 	do
 	{
 		cin >> playerChoice;
+		cout << endl;
 		if (playerChoice == 1)
 		{
 			playerChoice = (rand() % 2) + 1;
-			cout << playerChoice;
 			if (playerChoice == 1)
 			{
 				Ork ork;
-				//ork.species = "Ork";
-				ork.health = 50;
-				//cout << "Name: " << ork.species << endl;
+				ork.health = 500;
+				cout << "Species: Ork" << endl;
 				cout << "Starting HP: " << ork.health << endl;
+				cout << endl;
+				if (playerClass == "Wizard")
+				{
+					ork.TauntPlayer();
+					cout << wizard.name;
+					wizard.NormalAttack();
+					cout << "Ork." << endl;
+					ork.TauntPlayer();
+					cout << wizard.name;
+					wizard.SpecialAttack();
+					cout << "Ork." << endl;
+					cout << "The Ork";
+					ork.NormalAttack();
+					cout << wizard.name << "." << endl;
+					cout << "The Ork";
+					ork.NormalAttack();
+					cout << wizard.name << "." << endl;
+					cout << wizard.name;
+					wizard.SpecialAttack();
+					cout << "Ork." << endl;
+					ork.TauntPlayer();
+					cout << wizard.name;
+					wizard.SpecialAttack();
+					cout << "Ork." << endl;
+				}
+				else
+				{
+					ork.TauntPlayer();
+					cout << knight.name;
+					knight.NormalAttack();
+					cout << "Ork." << endl;
+					ork.TauntPlayer();
+					cout << knight.name;
+					knight.SpecialAttack();
+					cout << "Ork." << endl;
+					cout << "The Ork";
+					ork.NormalAttack();
+					cout << knight.name << "." << endl;
+					cout << "The Ork";
+					ork.NormalAttack();
+					cout << knight.name << "." << endl;
+					cout << knight.name;
+					knight.SpecialAttack();
+					cout << "Ork." << endl;
+					ork.TauntPlayer();
+					cout << knight.name;
+					knight.SpecialAttack();
+					cout << "Ork." << endl;
+				}
+				
+				
 
 			}
 			else 
 			{
 				Undead undead;
-				//undead.species = "Undead";
-				undead.health = 35;
-				//cout << "Name: " << undead.species << endl;
+				undead.health = 450;
+				cout << "Species: Undead" << endl;
 				cout << "Starting HP: " << undead.health << endl;
-				undead.NormalAttack();
+				cout << endl;
+				if (playerClass == "Wizard")
+				{
+					undead.TauntPlayer();
+					cout << wizard.name;
+					wizard.NormalAttack();
+					cout << "Undead." << endl;
+					undead.TauntPlayer();
+					cout << wizard.name;
+					wizard.SpecialAttack();
+					cout << "Undead." << endl;
+					cout << "The Undead";
+					undead.NormalAttack();
+					cout << wizard.name << "." << endl;
+					cout << "The Undead";
+					undead.NormalAttack();
+					cout << wizard.name << "." << endl;
+					cout << wizard.name;
+					wizard.SpecialAttack();
+					cout << "Undead." << endl;
+					undead.TauntPlayer();
+					cout << wizard.name;
+					wizard.SpecialAttack();
+					cout << "Undead." << endl;
+				}
+				else
+				{
+					undead.TauntPlayer();
+					cout << knight.name;
+					knight.NormalAttack();
+					cout << "Undead." << endl;
+					undead.TauntPlayer();
+					cout << knight.name;
+					knight.SpecialAttack();
+					cout << "Undead." << endl;
+					cout << "The Undead";
+					undead.NormalAttack();
+					cout << knight.name << "." << endl;
+					cout << "The Undead";
+					undead.NormalAttack();
+					cout << knight.name << "." << endl;
+					cout << knight.name;
+					knight.SpecialAttack();
+					cout << "Undead." << endl;
+					undead.TauntPlayer();
+					cout << knight.name;
+					knight.SpecialAttack();
+					cout << "Undead." << endl;
+				}
 			}
 		}
 		else if (playerChoice == 2)
