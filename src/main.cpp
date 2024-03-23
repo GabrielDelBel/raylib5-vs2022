@@ -40,7 +40,7 @@ T Area(T Rectangle)
 
 int main()
 {
-	Rectangle rectangle1 = new Rectangle();
+	Rectangle<int> rectangle = Rectangle<int>();
 	int x = 2;
 	int y = 5;
 	int intResult;
@@ -48,9 +48,9 @@ int main()
 	float b = 7.02;
 	float floatResult;
 
-	intResult = Rectangle<int>(Rectangle);
+	intResult = Area<int>(rectangle);
 	cout << intResult << endl;
-	floatResult = Square<float>(a, b);
+	floatResult = Area<float>(a, b);
 	cout << floatResult << endl;
 	
 	
