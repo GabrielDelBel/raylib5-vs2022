@@ -10,6 +10,7 @@ class Rectangle
 	T length;
 	T width;
 
+public:
 	void SetLength(T x)
 	{
 		length = x
@@ -32,7 +33,7 @@ class Rectangle
 };
 
 template <class T>
-T Area(T Rectangle)
+T Area(T x, T y)
 {
 	return length * width;
 }
@@ -40,7 +41,8 @@ T Area(T Rectangle)
 
 int main()
 {
-	Rectangle<int> rectangle = Rectangle<int>();
+	Rectangle<int> rectangle;
+	rectangle::SetLength();
 	int x = 2;
 	int y = 5;
 	int intResult;
@@ -48,7 +50,7 @@ int main()
 	float b = 7.02;
 	float floatResult;
 
-	intResult = Area<int>(rectangle);
+	intResult = Area(rectangle);
 	cout << intResult << endl;
 	floatResult = Area<float>(a, b);
 	cout << floatResult << endl;
