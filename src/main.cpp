@@ -5,21 +5,42 @@
 using namespace std;
 
 template <class T>
-class Sqaure
+class Rectangle
 {
 	T length;
 	T width;
 
+	void SetLength(T x)
+	{
+		length = x
+	}
+	void Setwidth(T y)
+	{
+		width = y
+	}
+
+	T GetLength()
+	{
+		return length;
+	}
+
+	T Getwidth()
+	{
+		return width
+	}
+
 };
 
 template <class T>
-T Square(T length, T width)
+T Area(T Rectangle)
 {
 	return length * width;
 }
 
+
 int main()
 {
+	Rectangle rectangle1 = new Rectangle();
 	int x = 2;
 	int y = 5;
 	int intResult;
@@ -27,7 +48,7 @@ int main()
 	float b = 7.02;
 	float floatResult;
 
-	intResult = Square<int>(x, y);
+	intResult = Rectangle<int>(Rectangle);
 	cout << intResult << endl;
 	floatResult = Square<float>(a, b);
 	cout << floatResult << endl;
