@@ -12,13 +12,19 @@ class Rectangle
 	
 
 public:
+	Rectangle(T x, T y)
+	{
+		length = x;
+		width = y;
+	}
+
 	void SetLength(T x)
 	{
-		length = x
+		length = x;
 	}
 	void SetWidth(T y)
 	{
-		width = y
+		width = y;
 	}
 
 	T GetLength()
@@ -28,36 +34,37 @@ public:
 
 	T GetWidth()
 	{
-		return width
+		return width;
 	}
-
-	T area;
 
 };
 
 template <class T>
-T Area(T Rectangle)
+T Area(Rectangle<T>& quadraltaical)
 {
-	Rectangle.
-	return length * width;
+	return quadraltaical.GetLength() * quadraltaical.GetWidth();
 }
 
 
 int main()
 {
-	Rectangle<int> rectangle;
-	Rectangle<float> rectangle2;
-	int x = 2;
-	int y = 5;
-	rectangle.SetLength(x);
-	rectangle.SetWidth(y);
-	float a = 4.37;
-	float b = 7.02;
+	
+	
+	Rectangle<int> rectangle(2,5);
+	Rectangle<float> rectangle2(4.37f, 7.02f);
+	
+	cout << "Rectangle 1:" << endl;
+	cout << "Length " << rectangle.GetLength() << endl;
+	cout << "Width " << rectangle.GetWidth() << endl;
+	cout << "Rectangle 2:" << endl;
+	cout << "Length " << rectangle2.GetLength() << endl;
+	cout << "Width " << rectangle2.GetWidth() << endl;
 
-	rectangle.area = Area<int>(rectangle);
-	cout << intResult << endl;
-	floatResult = Area<float>(a, b);
-	cout << floatResult << endl;
+	cout << "Rectangle 1:" << endl;
+	cout << "Area " << Area<int>(rectangle) << endl;
+	cout << "Rectangle 2:" << endl;
+	cout << "Area " << Area<float>(rectangle2) << endl;
+	
 	
 	
 
