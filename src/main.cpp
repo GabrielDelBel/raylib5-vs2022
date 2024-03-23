@@ -9,13 +9,14 @@ class Rectangle
 {
 	T length;
 	T width;
+	
 
 public:
 	void SetLength(T x)
 	{
 		length = x
 	}
-	void Setwidth(T y)
+	void SetWidth(T y)
 	{
 		width = y
 	}
@@ -25,16 +26,19 @@ public:
 		return length;
 	}
 
-	T Getwidth()
+	T GetWidth()
 	{
 		return width
 	}
 
+	T area;
+
 };
 
 template <class T>
-T Area(T x, T y)
+T Area(T Rectangle)
 {
+	Rectangle.
 	return length * width;
 }
 
@@ -42,15 +46,15 @@ T Area(T x, T y)
 int main()
 {
 	Rectangle<int> rectangle;
-	rectangle::SetLength();
+	Rectangle<float> rectangle2;
 	int x = 2;
 	int y = 5;
-	int intResult;
+	rectangle.SetLength(x);
+	rectangle.SetWidth(y);
 	float a = 4.37;
 	float b = 7.02;
-	float floatResult;
 
-	intResult = Area(rectangle);
+	rectangle.area = Area<int>(rectangle);
 	cout << intResult << endl;
 	floatResult = Area<float>(a, b);
 	cout << floatResult << endl;
