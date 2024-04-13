@@ -34,11 +34,6 @@ void CookPancakes()
 	
 }
 
-int GetPancakeStackSize()
-{
-	return pancakes.pancakeStack.size();
-}
-
 void LineUpCustomers() 
 {
 	for (int x = 0; x < 30; x++)
@@ -49,16 +44,29 @@ void LineUpCustomers()
 
 void RemovePancakes(int orderSize)
 {
-	for (int x = 0; x <orderSize; x++)
+	for (int x = orderSize; x > 0; x--)
 	{
-		if (pancakes.pancakeStack.size() > 0)
+		try
 		{
-			pancakes.pancakeStack.pop();
+			if (pancakes.pancakeStack.size() > 0)
+			{
+				pancakes.pancakeStack.pop();
+			}
+			else
+			{
+				throw int(x);
+			}
 		}
-		else
+		catch (int remaningPancakes)
 		{
-			throw string("There aren't enough pancakes in the stack.");
+			cout << "Error: The customer ordered " << remaningPancakes << " too many pancakes." << endl;
+			cout << endl;
+			cout << "Cooking more pancakes." << endl;
+			cout << endl;
+			CookPancakes();
+			RemovePancakes(remaningPancakes);
 		}
+		
 		
 	}
 }
@@ -83,7 +91,11 @@ int main()
 		cout << endl;
 		cout << "The " << x << " customer wants " << randomNum << " pancakes." << endl;
 		cout << endl;
+		cout << "There are currently " << pancakes.pancakeStack.size() << " pancakes on the stack." << endl;
+		cout << endl;
 		RemovePancakes(randomNum);
+		cout << "After the order there are " << pancakes.pancakeStack.size() << " pancakes on the stack." << endl;
+		cout << endl;
 	}
 	
 };
