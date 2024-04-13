@@ -7,94 +7,84 @@
 using namespace std;
 
 
-class ReversableWords
+class Pancakes
 {
 public:
-	queue<char> original;
-	stack<char> backwards;
-	string wordToFlip;
-	bool isPalindrome;
+	int numPancakes;
+	stack<int> pancakeStack;
 };
 
-ReversableWords words;
+Pancakes pancakes;
 
-void ReverseWord(string passedWord, int x)
+class CustomerLine 
 {
-	words.wordToFlip = passedWord;
-	if (x < words.wordToFlip.length())
+public:
+	int numCustomers;
+	queue<int> customerQueue;
+};
+
+CustomerLine line;
+
+void CookPancakes()
+{
+	for (int x = 0; x < 5; x++)
 	{
-		if (!isspace(words.wordToFlip[x]))
+		pancakes.pancakeStack.push(0);
+	}
+	
+}
+
+int GetPancakeStackSize()
+{
+	return pancakes.pancakeStack.size();
+}
+
+void LineUpCustomers() 
+{
+	for (int x = 0; x < 30; x++)
+	{
+		line.customerQueue.push(0);
+	}
+}
+
+void RemovePancakes(int orderSize)
+{
+	for (int x = 0; x <orderSize; x++)
+	{
+		if (pancakes.pancakeStack.size() > 0)
 		{
-			words.original.push(words.wordToFlip[x]);
-			words.backwards.push(words.wordToFlip[x]);
-			ReverseWord(words.wordToFlip, ++x);
+			pancakes.pancakeStack.pop();
 		}
 		else
 		{
-			ReverseWord(words.wordToFlip, ++x);
+			throw string("There aren't enough pancakes in the stack.");
 		}
 		
 	}
-
 }
 
-void PrintReversedWord()
-{
-	if (words.backwards.size() > 0)
-	{
-		cout << words.backwards.top();
-		words.backwards.pop();
-		PrintReversedWord();
-	}	
-}
-
-void EmptyOriginalWord()
-{
-	if (words.original.size() > 0)
-	{
-		words.backwards.pop();
-		PrintReversedWord();
-	}
-}
-
-void IsPalindrome(int num)
-{
-	if (num >= words.wordToFlip.length())
-	{
-		cout << words.wordToFlip << " is a palindrome." << endl;;
-	}
-
-	if (words.backwards.size() > 0 && words.original.size() > 0 && words.backwards.size() == words.original.size())
-	{
-		if (words.original.front() == words.backwards.top())
-		{
-			words.original.pop();
-			words.backwards.pop();
-			IsPalindrome(++num);
-		}
-		else
-		{
-			cout << words.wordToFlip << " is not a palindrome." << endl;;
-		}
-	}
-	else
-	{
-	}
-}
 
 
 int main()
 {
-	string word;
+	string wait;
 
-	cout << "Please Enter a String" << endl;
-	cin >> word;
-	ReverseWord(word, 0);
-	cout << "Is the word you enetered a palindrome?" << endl;
-	IsPalindrome(0);
-	ReverseWord(word, 0);
-	cout << "Here is your word reversed." << endl;
-	PrintReversedWord();
+	CookPancakes();
+	LineUpCustomers();
+	cout << "Welcome to Gabriel's Pancake Shop" << endl;
+	cout << "Please press any key to continue." << endl;
+	cin >> wait;
+	cout << endl;
+
+	for (int x = 1; x <= 30; x++)
+	{
+		int randomNum = (int)Random(1, 3);
+		cout << "Seriving the " << x << " customer." << endl;
+		cout << endl;
+		cout << "The " << x << " customer wants " << randomNum << " pancakes." << endl;
+		cout << endl;
+		RemovePancakes(randomNum);
+	}
 	
 };
 
