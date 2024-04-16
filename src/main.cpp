@@ -192,6 +192,7 @@ int ValidateCommand(queue<char> word)
 
 string ValidateItem(queue<char> word)
 {
+	word.pop();
 	string enteredCommand;
 	do
 	{
@@ -213,20 +214,19 @@ string ValidateItem(queue<char> word)
 	}
 }
 
-
+bool split = false;
 
 int main()
 {
 	
 	player = new Knight();
 	string decision;
-	bool split = false;
 	queue<char> firstHalf;
 	queue<char> secondHalf;
 	int validation;
 
 	cout << "Please type Pickup Knife" << endl;
-	cin >> decision;
+	getline(cin, decision);
 	for (int x = 0; x < decision.length() ; x++)
 	{
 		if (isspace(decision[x]))
@@ -240,6 +240,7 @@ int main()
 		}
 		else
 		{
+			
 			secondHalf.push(decision[x]);
 		}
 	}
@@ -251,7 +252,7 @@ int main()
 		command = new PickUp;
 		command->CommandUsed(player->inventory, decision);
 	}
-	cout << player->inventory.size() << endl;
+	cout << player->inventory.front() << endl;
 };
 
 
