@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <queue>
+#include <cctype>
 using namespace std;
 
 
@@ -11,6 +13,7 @@ class Items
 {
 public:
 	string items[3] = {"knife" ,"sword", "gun"};
+	string validCommands[2] = { "pickup" ,"drop"};
 };
 
 Items classItem;
@@ -31,6 +34,7 @@ public:
 		if (classItem.items[0] == item)
 		{
 			inventory.push_front(item);
+			classItem.items->erase(0);
 		}
 		else
 		{
@@ -74,6 +78,8 @@ public:
 
 	virtual int SpecialAttack() = 0;
 };
+
+Player* player;
 
 class Enemy : public GameObject
 {
@@ -160,16 +166,92 @@ public:
 
 string Undead::species = "Undead";
 
+
+int ValidateCommand(queue<char> word)
+{
+	string enteredCommand;
+	do
+	{
+		enteredCommand += tolower(word.front());
+		word.pop();
+	} while (word.size() > 0);	
+	cout << enteredCommand << endl;
+
+	for (int x = 0; x < classItem.validCommands->size();x++)
+	{
+		if (enteredCommand == classItem.validCommands[x])
+		{
+			return x;
+		}
+		else
+		{
+			return -1;
+		}
+	}	
+}
+
+string ValidateItem(queue<char> word)
+{
+	string enteredCommand;
+	do
+	{
+		enteredCommand += tolower(word.front());
+		word.pop();
+	} while (word.size() > 0);
+	cout << enteredCommand << endl;
+
+	for (int x = 0; x < classItem.validCommands->size();x++)
+	{
+		if (enteredCommand == classItem.items[x])
+		{
+			return enteredCommand;
+		}
+		else
+		{
+			return "failure";
+		}
+	}
+}
+
+
+
 int main()
 {
-	Player* player;
+	
 	player = new Knight();
-	Commands* command;
 	string decision;
+	bool split = false;
+	queue<char> firstHalf;
+	queue<char> secondHalf;
+	int validation;
 
 	cout << "Please type Pickup Knife" << endl;
 	cin >> decision;
-	player->inventory;
+	for (int x = 0; x < decision.length() ; x++)
+	{
+		if (isspace(decision[x]))
+		{
+			split = true;
+		}
+
+		if (!split)
+		{
+			firstHalf.push(decision[x]);
+		}
+		else
+		{
+			secondHalf.push(decision[x]);
+		}
+	}
+	validation = ValidateCommand(firstHalf);
+	decision = ValidateItem(secondHalf);
+	if (validation == 0)
+	{
+		Commands* command;
+		command = new PickUp;
+		command->CommandUsed(player->inventory, decision);
+	}
+	cout << player->inventory.size() << endl;
 };
 
 
