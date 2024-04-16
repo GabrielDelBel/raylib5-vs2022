@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 using namespace std;
+using Vector;
+
 
 
 class Commands
@@ -23,7 +25,7 @@ class Player : public GameObject
 public:
 	string name;
 	int health;
-	Vector<string> inventory = new Vector();
+	List<string> inventory = new List();
 
 	int NormalAttack()
 	{
