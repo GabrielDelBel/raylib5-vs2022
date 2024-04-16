@@ -10,28 +10,40 @@ using namespace std;
 class Items
 {
 public:
-	string items[3] = {"" ,"", ""};
+	string items[3] = {"knife" ,"sword", "gun"};
 };
+
+Items classItem;
 
 class Commands
 {
 public: 
-	virtual void CommandUsed(list<string> inventory) = 0;
+	virtual void CommandUsed(list<string>& inventory, string item) = 0;
+
+
 };
 
 class PickUp : public Commands
 {
 public:
-	void CommandUsed(list<string>* inventory)
+	void CommandUsed(list<string>& inventory, string item)
 	{
-
+		if (classItem.items[0] == item)
+		{
+			inventory.push_front(item);
+		}
+		else
+		{
+			cout << "You did not make a valid selection";
+		}
+		
 	}
 };
 
 class Drop : public Commands
 {
 public:
-	void CommandUsed(list<string>* inventory)
+	void CommandUsed(list<string>& inventory, string item)
 	{
 
 	}
@@ -150,7 +162,14 @@ string Undead::species = "Undead";
 
 int main()
 {
-	
+	Player* player;
+	player = new Knight();
+	Commands* command;
+	string decision;
+
+	cout << "Please type Pickup Knife" << endl;
+	cin >> decision;
+	player->inventory;
 };
 
 
