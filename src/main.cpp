@@ -4,6 +4,12 @@
 #include <string>
 using namespace std;
 
+
+class Commands
+{
+
+};
+
 class GameObject
 {
 public:
@@ -17,6 +23,7 @@ class Player : public GameObject
 public:
 	string name;
 	int health;
+	Vector<string> inventory = new Vector();
 
 	int NormalAttack()
 	{
@@ -187,7 +194,9 @@ int main()
 
 			if (playerChoice == 1)
 			{
-				Ork ork = new Ork();
+				Enemy* enemy = nullptr;
+				enemy = new Ork();
+				enemy->NormalAttack();
 				ork.health = 500;
 				cout << "Species: " << ork.species << endl;
 				cout << "Starting HP: " << ork.health << endl;
