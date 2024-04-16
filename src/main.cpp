@@ -187,7 +187,7 @@ int main()
 
 			if (playerChoice == 1)
 			{
-				Ork ork;
+				Ork ork = new Ork();
 				ork.health = 500;
 				cout << "Species: " << ork.species << endl;
 				cout << "Starting HP: " << ork.health << endl;
