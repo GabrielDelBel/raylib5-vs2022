@@ -36,15 +36,15 @@ class PickUp : public Commands
 public:
 	void CommandUsed(list<string>& inventory, string item)
 	{
-		if (classItem.items[0] == item)
-		{
-			inventory.push_front(item);
-			classItem.items->erase(0);
-		}
-		else
-		{
+		//if (classItem.items[0] == item)
+		//{
+			//inventory.push_front(item);
+			//classItem.items->erase(0);
+		//}
+		//else
+		//{
 			cout << "You did not make a valid selection";
-		}
+		//}
 		
 	}
 };
@@ -274,101 +274,21 @@ void SetUpDungeon(string characterClass)
 	
 }
 
-void Dungeon(int roomNumber, Player* character)
-{
-	int invalidActions = 0;
-	string choice;
-
-	if (dungeon[roomNumber].isDoorOpen == false) 
-	{
-		dungeon[roomNumber].choiceText[6] = "";
-	}
-
-	if (character->inventory.size() == 0)
-	{
-		dungeon[roomNumber].choiceText[1] = "";
-		dungeon[roomNumber].choiceText[2] = "";
-		dungeon[roomNumber].choiceText[3] = "";
-		dungeon[roomNumber].choiceText[4] = "";
-	}
-	else if (character->inventory.size() >= 0)
-	{
-		if (character->isInventoryOpen == false)
-		{
-			dungeon[roomNumber].choiceText[1] = "";
-			dungeon[roomNumber].choiceText[2] = "";
-			dungeon[roomNumber].choiceText[3] = "";
-		}
-		if (character->isInventoryOpen == false)
-		{
-			dungeon[roomNumber].choiceText[0] = "";
-			dungeon[roomNumber].choiceText[5] = "";
-			dungeon[roomNumber].choiceText[4] = "Close Inventory";
-		}
-	}
-
-	cout << dungeon[roomNumber].fillerText[dungeon[roomNumber].textStage] << endl;
-	cout << endl;
-	cout << "You can ";
-	for (int i = 0; i < dungeon[roomNumber].validCommands->length(); i++)
-	{
-		if (dungeon[roomNumber].choiceText[i] == "")
-		{
-			invalidActions++;
-		}
-		cout << i - invalidActions << ": " << dungeon[roomNumber].choiceText[i] << endl;
-	}
-
-	cout << "Please type one of your available options. Case doesn't matter" << endl;
-	getline(cin, choice);
-	SplitChoice(choice,roomNumber);
-}
 void PrintInventory(int roomNumber, Player* character)
 {
 	int invalidActions = 0;
 	cout << endl;
 	cout << "---------------------------------------------------------------" << endl;
 	cout << "Inventory" << endl;
-	for (int i = 0; i < dungeon[roomNumber].validCommands->length(); i++)
+	for (int i = 0; i < character->inventory.size(); i++)
 	{
-
-
+		string savedItem;
+		savedItem = character->inventory.front();
+		cout << character->inventory.front() << endl;
+		character->inventory.pop_front();
+		character->inventory.push_back(savedItem);
 	}
-
-	for (int i = 0; i < dungeon[roomNumber].validCommands->length(); i++)
-	{
-		if (dungeon[roomNumber].choiceText[i] == "")
-		{
-			invalidActions++;
-		}
-		cout << i - invalidActions << ": " << dungeon[roomNumber].choiceText[i] << endl;
-	}
-
-}
-
-
-void SplitChoice(string decision, int roomNum)
-{
-	queue<char> firstHalf;
-	queue<char> secondHalf;
-	for (int x = 0; x < decision.length(); x++)
-	{
-		if (isspace(decision[x]))
-		{
-			split = true;
-		}
-
-		if (!split)
-		{
-			firstHalf.push(decision[x]);
-		}
-		else
-		{
-
-			secondHalf.push(decision[x]);
-		}
-	}
-	ValidateCommandOrItem(player, firstHalf, secondHalf, roomNum);
+	cout << "---------------------------------------------------------------" << endl;
 }
 
 void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> item, int roomNum)
@@ -379,7 +299,7 @@ void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> it
 	{
 		enteredCommand += tolower(action.front());
 		action.pop();
-	} while (action.size() > 0);	
+	} while (action.size() > 0);
 
 	do
 	{
@@ -417,47 +337,108 @@ void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> it
 			}
 			else if (x == 5)
 			{
-
+				dungeon[roomNum].textStage++;
 			}
 			else if (x == 6)
 			{
-				Dungeon(++roomNum, character);
+				if (dungeon[roomNum].isDoorOpen == true)
+				{
+
+				}
+				else
+				{
+					cout << "The Door isn't Open Yet." << endl;
+				}
+
 			}
 		}
 		else
 		{
 			cout << "You did not choose a valid option." << endl;
 		}
-	}	
+	}
 }
+bool split = false;
 
-bool valid = false;
-
-string SimpleValidation(string simpleDecision)
+void SplitChoice(string decision, int roomNum)
 {
-	do
+	queue<char> firstHalf;
+	queue<char> secondHalf;
+	for (int x = 0; x < decision.length(); x++)
 	{
-		
-		if (simpleDecision == "1")
+		if (isspace(decision[x]))
 		{
-			valid = true;
-			return "1";
-
+			split = true;
 		}
-		else if (simpleDecision == "2")
+
+		if (!split)
 		{
-			valid = true;
-			return "2";
+			firstHalf.push(decision[x]);
 		}
 		else
 		{
-			cout << "You did not choose a valid option." << endl;
-			getline(cin, simpleDecision);
-			valid = false;
 
+			secondHalf.push(decision[x]);
 		}
+	}
+	ValidateCommandOrItem(player, firstHalf, secondHalf, roomNum);
+}
 
-	} while (!valid);
+void Dungeon(int roomNumber, Player* character)
+{
+	int invalidActions = 0;
+	string choice;
+
+	if (dungeon[roomNumber].isDoorOpen == false) 
+	{
+		dungeon[roomNumber].choiceText[6] = "";
+	}
+
+	if (character->inventory.size() == 0)
+	{
+		dungeon[roomNumber].choiceText[1] = "";
+		dungeon[roomNumber].choiceText[2] = "";
+		dungeon[roomNumber].choiceText[3] = "";
+		dungeon[roomNumber].choiceText[4] = "";
+	}
+	else if (character->inventory.size() >= 0)
+	{
+		if (character->isInventoryOpen == false)
+		{
+			dungeon[roomNumber].choiceText[1] = "";
+			dungeon[roomNumber].choiceText[2] = "";
+			dungeon[roomNumber].choiceText[3] = "";
+		}
+		if (character->isInventoryOpen == false)
+		{
+			dungeon[roomNumber].choiceText[0] = "";
+			dungeon[roomNumber].choiceText[5] = "";
+			dungeon[roomNumber].choiceText[4] = "Close Inventory";
+		}
+	}
+
+	cout << dungeon[roomNumber].fillerText[dungeon[roomNumber].textStage] << endl;
+
+	if (character->isInventoryOpen == true)
+	{
+		PrintInventory(roomNumber, character);
+	}
+
+	cout << endl;
+	cout << "You can ";
+	for (int i = 0; i < dungeon[roomNumber].validCommands->length(); i++)
+	{
+		if (dungeon[roomNumber].choiceText[i] == "")
+		{
+			invalidActions++;
+		}
+		cout << i - invalidActions << ": " << dungeon[roomNumber].choiceText[i] << endl;
+	}
+
+	cout << "Please type one of your available options. Case doesn't matter" << endl;
+	getline(cin, choice);
+	SplitChoice(choice,roomNumber);
+	Dungeon(++roomNumber, character);
 }
 
 void ChooseClass(string chosenClass)
@@ -482,25 +463,42 @@ void Battle(Player* character, Enemy* combattant )
 	combattant->TauntPlayer();
 }
 
-bool split = false;
 
 int main()
 {
-
+	bool valid = false;
 	string decision;
-
 	cout << "Welcome To Gabriel's Amazing RPG" << endl;
 	cout << "You can either play as a Wizard or a Knight." << endl;
 	cout << "Please press 1 for Wizard or 2 for Knight." << endl;
 	getline(cin, decision);
-	if (SimpleValidation(decision) == "1")
+	do
 	{
-		ChooseClass("1");
-	}
-	else
-	{
-		ChooseClass("2");
-	}
+
+		if (decision == "1")
+		{
+			valid = true;
+			ChooseClass("1");
+
+		}
+		else if (decision == "2")
+		{
+			valid = true;
+			ChooseClass("2");
+		}
+		else
+		{
+			cout << "You did not choose a valid option." << endl;
+
+		}
+
+	} while (!valid);
+	
+	
+		
+	
+	
+
 	cout << "Please enter your name." << endl;
 	getline(cin, decision);
 	player->name = decision;
