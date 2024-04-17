@@ -7,14 +7,26 @@
 #include <cctype>
 using namespace std;
 
+class Room
+{
+public:
+	int textStage;
+	int availaleActions;
+	bool isDoorOpen;
+	string items[3];
+	string fillerText[3];
+	string validCommands[7];
+	string choiceText[7];
+};
 
+Room dungeon[4];
 
 class Items
 {
 public:
-	string itemsKnight[4] = {"Claymore", "Scimitar", "LongSword","Rapier"};
-	string itemsWizard[4] = { "Fire Wand", "Magic Cloak", "Inferno Wand", "Book of Knowledge" };
-	string itemsBoth[3] = { "Small Potion", "Medium Potion", "Large Potion" };
+	string itemsKnight[4] = {"claymore", "scimitar", "longsword","rapier"};
+	string itemsWizard[4] = { "wand", "cloak", "inferno", "book" };
+	string itemsBoth[3] = { "small potion", "medium potion", "large potion" };
 	string validCommands[7] = { "pickup" ,"drop", "use", "equip","open","search","leave"};
 	string choiceText[7] = { "Pickup ", "Drop ","Use ","Equip ","Open Inventory","Search Around","Leave Room"};
 };
@@ -24,7 +36,7 @@ Items classItem;
 class Commands
 {
 public: 
-	virtual void CommandUsed(list<string>& inventory, string item) = 0;
+	virtual void CommandUsed(list<string>& inventory, string item, int roomNum) = 0;
 
 
 };
@@ -34,61 +46,122 @@ Commands* command;
 class PickUp : public Commands
 {
 public:
-	void CommandUsed(list<string>& inventory, string item)
+	void CommandUsed(list<string>& inventory, string item, int roomNum)
 	{
-		//if (classItem.items[0] == item)
-		//{
-			//inventory.push_front(item);
-			//classItem.items->erase(0);
-		//}
-		//else
-		//{
-			cout << "You did not make a valid selection";
-		//}
+		bool foundItem = false;
+		for (int a = 0; a < dungeon[roomNum].items->size(); a++)
+		{
+			if (dungeon[roomNum].items[a] == item)
+			{
+				inventory.push_front(item);
+				dungeon[roomNum].items->erase(a);
+				foundItem = true;
+			}
+			
+		}
+		if (!foundItem)
+		{
+			cout << "The item you selected wasn't there";
+		}
 		
 	}
 };
 
+
+
 class Drop : public Commands
 {
 public:
-	void CommandUsed(list<string>& inventory, string item)
+	void CommandUsed(list<string>& inventory, string item, int roomNum)
 	{
-
+		bool foundItem = false;
+		for (int a = 0; a < inventory.size(); a++)
+		{
+			if (inventory.front() == item)
+			{
+				foundItem = true;
+				inventory.pop_front();
+			}
+			else
+			{
+				string savedItem;
+				savedItem = inventory.front();
+				cout << inventory.front() << endl;
+				inventory.pop_front();
+				inventory.push_back(savedItem);
+			}
+		}
+		if (!foundItem)
+		{
+			cout << "The item you selected wasn't there";
+		}
 	}
 };
 
+bool canHeal = false;
+
 class Heal : public Commands
 {
-	void CommandUsed(list<string>& inventory, string item)
+	void CommandUsed(list<string>& inventory, string item, int roomNum)
 	{
+		bool foundItem = false;
+		canHeal = false;
+		for (int a = 0; a < inventory.size(); a++)
+		{
+			if (inventory.front() == item)
+			{
+				foundItem = true;
+				canHeal = true;
 
+			}
+			else
+			{
+				string savedItem;
+				savedItem = inventory.front();
+				cout << inventory.front() << endl;
+				inventory.pop_front();
+				inventory.push_back(savedItem);
+			}
+		}
+		if (!foundItem)
+		{
+			cout << "The item you selected wasn't there";
+		}
 	}
 };
 
 class Equip : public Commands
 {
-	void CommandUsed(list<string>& inventory, string item)
+	void CommandUsed(list<string>& inventory, string item, int roomNum)
 	{
+		
+			bool foundItem = false;
+			canHeal = false;
+			for (int a = 0; a < inventory.size(); a++)
+			{
+				if (inventory.front() == item)
+				{
+					foundItem = true;
+					canHeal = true;
 
+				}
+				else
+				{
+					string savedItem;
+					savedItem = inventory.front();
+					cout << inventory.front() << endl;
+					inventory.pop_front();
+					inventory.push_back(savedItem);
+				}
+			}
+			if (!foundItem)
+			{
+				cout << "The item you selected wasn't there";
+			}
+		
 	}
 };
 
-class Look
-{
-	void CommandUsed()
-	{
-
-	}
-};
-
-class Open 
-{
-	void CommandUsed()
-	{
-
-	}
-};
 
 
 class GameObject
@@ -120,6 +193,10 @@ public:
 	virtual void SetInitialHPAttackandClass() = 0;
 
 	virtual int SpecialAttack() = 0;
+
+	virtual void SetHP(int changeHealth) = 0;
+
+	virtual void SetAttack(int changeAttack) = 0;
 };
 
 Player* player;
@@ -159,6 +236,16 @@ public:
 		typeCharacter = "Wizard";
 	}
 
+	void SetHP(int changeHealth)
+	{
+		health += changeHealth;
+	}
+
+	void SetAttack(int changeAttack)
+	{
+		attack += changeAttack;
+	}
+
 	int SpecialAttack()
 	{
 		specialAttackAmount = (rand() % 25) + 150;
@@ -180,6 +267,15 @@ public:
 		health = 200;
 		attack = 20;
 		typeCharacter = "Knight";
+	}
+	void SetHP(int changeHealth)
+	{
+		health += changeHealth;
+	}
+
+	void SetAttack(int changeAttack)
+	{
+		attack += changeAttack;
 	}
 
 	int SpecialAttack()
@@ -227,21 +323,7 @@ public:
 
 string Undead::species = "Undead";
 
-class Room
-{
-public:
-	int textStage;
-	int availaleActions;
-	bool isDoorOpen;
-	string items[3];
-	string fillerText[3];
-	string validCommands[7];
-	string choiceText[7];
-	Enemy* foe;
-
-};
-
-Room dungeon[4];
+void Dungeon(int roomNumber, Player* character);
 
 void SetUpDungeon(string characterClass)
 {
@@ -265,7 +347,7 @@ void SetUpDungeon(string characterClass)
 
 	dungeon[0].items[0] = classItem.itemsBoth[0];
 	dungeon[0].items[1] = classItem.itemsKnight[0];
-	dungeon[0].items[2] = classItem.itemsKnight[0];
+	dungeon[0].items[2] = classItem.itemsWizard[0];
 	dungeon[0].fillerText[0] = "You are in the dungeon entrence. This must have been where they brought the prisoners for proccesing.";
 	dungeon[0].fillerText[1] = "After a bit of seaching you find weapons on the ground. However, you saw movement out of the corner of your eye.";
 	dungeon[0].fillerText[2] = "You search more, but find nothing. You don't notice the undead attacking from behind.";
@@ -283,6 +365,7 @@ void PrintInventory(int roomNumber, Player* character)
 	for (int i = 0; i < character->inventory.size(); i++)
 	{
 		string savedItem;
+		cout << character->inventory.size();
 		savedItem = character->inventory.front();
 		cout << character->inventory.front() << endl;
 		character->inventory.pop_front();
@@ -296,6 +379,9 @@ void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> it
 	string enteredCommand;
 	string enteredItem;
 	int validchoice = 0;
+
+	item.pop();
+
 	do
 	{
 		enteredCommand += tolower(action.front());
@@ -316,26 +402,37 @@ void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> it
 			if (x == 0)
 			{
 				command = new PickUp();
-				command->CommandUsed(character->inventory, enteredItem);
+				command->CommandUsed(character->inventory, enteredItem,roomNum);
 			}
 			else if (x == 1)
 			{
 				command = new Drop();
-				command->CommandUsed(character->inventory, enteredItem);
+				command->CommandUsed(character->inventory, enteredItem, roomNum);
 			}
 			else if (x == 2)
 			{
 				command = new Heal();
-				command->CommandUsed(character->inventory, enteredItem);
+				command->CommandUsed(character->inventory, enteredItem, roomNum);
+				if(canHeal)
+					character->SetHP(character->health/100*30);
 			}
 			else if (x == 3)
 			{
 				command = new Equip();
-				command->CommandUsed(character->inventory, enteredItem);
+				command->CommandUsed(character->inventory, enteredItem,roomNum);
+				if (canHeal)
+					character->SetAttack(10);
 			}
 			else if (x == 4)
 			{
-				character->isInventoryOpen = true;
+				if (character->isInventoryOpen == false)
+				{
+					character->isInventoryOpen = true;
+				}
+				else
+				{
+					character->isInventoryOpen = false;
+				}
 			}
 			else if (x == 5)
 			{
@@ -372,6 +469,7 @@ void SplitChoice(string decision, int roomNum)
 {
 	queue<char> firstHalf;
 	queue<char> secondHalf;
+	split = false;
 	for (int x = 0; x < decision.length(); x++)
 	{
 		if (isspace(decision[x]))
@@ -394,8 +492,8 @@ void SplitChoice(string decision, int roomNum)
 
 void Dungeon(int roomNumber, Player* character)
 {
-	int invalidActions = 0;
 	string choice;
+
 
 	if (dungeon[roomNumber].isDoorOpen == false) 
 	{
@@ -417,7 +515,7 @@ void Dungeon(int roomNumber, Player* character)
 			dungeon[roomNumber].choiceText[2] = "";
 			dungeon[roomNumber].choiceText[3] = "";
 		}
-		if (character->isInventoryOpen == false)
+		if (character->isInventoryOpen == true)
 		{
 			dungeon[roomNumber].choiceText[0] = "";
 			dungeon[roomNumber].choiceText[5] = "";
@@ -433,16 +531,28 @@ void Dungeon(int roomNumber, Player* character)
 	}
 
 	cout << endl;
-	cout << "You can ";
+	cout << "You can: " << endl;
 	for (int i = 0; i < dungeon[roomNumber].validCommands->length(); i++)
-	{
+	{	
 		if (dungeon[roomNumber].choiceText[i] == "")
 		{
-			invalidActions++;
+
 		}
-		if (i + 1 - invalidActions > 0)
+		else
 		{
-			cout << i + 1 - invalidActions << ": " << dungeon[roomNumber].choiceText[i] << endl;
+			if (i == 0 && dungeon[roomNumber].items->size() > 0)
+			{
+				for (int j = 0; j < dungeon[roomNumber].items->size()/4; j++)
+				{
+					cout << dungeon[roomNumber].choiceText[0] << dungeon[roomNumber].items[j] << endl;
+				}
+				
+			}
+			else 
+			{
+				cout << dungeon[roomNumber].choiceText[i] << endl;
+			}
+			
 		}
 		
 	}
@@ -450,6 +560,10 @@ void Dungeon(int roomNumber, Player* character)
 	cout << "Please type one of your available options. Case doesn't matter" << endl;
 	getline(cin, choice);
 	SplitChoice(choice,roomNumber);
+	for (int j = 0; j < dungeon[roomNumber].choiceText->length(); j++)
+	{
+		dungeon[roomNumber].choiceText[j] = classItem.choiceText[j];
+	}
 	Dungeon(roomNumber, character);
 }
 
@@ -511,7 +625,7 @@ int main()
 	cout << endl;
 	cout << "Press any key to continue.";
 	cout << endl;
-	cout << "You are a " << player->typeCharacter << "in search of fame and riches." << endl;
+	cout << "You are a " << player->typeCharacter << " in search of fame and riches." << endl;
 	cout << "You left your small village and headed towards a nearby dungeon 3 days away." << endl;
 	cout << "You've heard rumors that there's a treasure deep in the dungeon guarded by a monster who had been terrorizing the nearby town." << endl;
 	cout << "Who ever defeats the monster would become famous. As well as being able to claim the treasure." << endl;
