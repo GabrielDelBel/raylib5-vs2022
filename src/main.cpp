@@ -15,7 +15,8 @@ public:
 	string itemsKnight[4] = {"Claymore", "Scimitar", "LongSword","Rapier"};
 	string itemsWizard[4] = { "Fire Wand", "Magic Cloak", "Inferno Wand", "Book of Knowledge" };
 	string itemsBoth[3] = { "Small Potion", "Medium Potion", "Large Potion" };
-	string validCommands[6] = { "pickup" ,"drop", "use", "equip","open","search"};
+	string validCommands[7] = { "pickup" ,"drop", "use", "equip","open","search","leave"};
+	string choiceText[7] = { "Pickup ", "Drop ","Use ","Equip ","Open Inventory","Search Around","Leave Room"};
 };
 
 Items classItem;
@@ -104,6 +105,7 @@ public:
 	string name;
 	int health;
 	int attack;
+	bool isInventoryOpen;
 	string typeCharacter;
 	list<string> inventory;
 
@@ -233,7 +235,8 @@ public:
 	bool isDoorOpen;
 	string items[3];
 	string fillerText[3];
-	string validCommands[6];
+	string validCommands[7];
+	string choiceText[7];
 	Enemy* foe;
 
 };
@@ -256,8 +259,10 @@ void SetUpDungeon(string characterClass)
 		for (int j = 0; i < classItem.validCommands->length(); i++)
 		{
 			dungeon[i].validCommands[j] = classItem.validCommands[j];
+			dungeon[i].choiceText[j] = classItem.choiceText[j];
 		}
 	}
+
 	dungeon[0].items[0] = classItem.itemsBoth[0];
 	dungeon[0].items[1] = classItem.itemsKnight[0];
 	dungeon[0].items[2] = classItem.itemsKnight[0];
@@ -268,17 +273,79 @@ void SetUpDungeon(string characterClass)
 
 	
 }
-void Dungeon(int roomNumber)
+
+void Dungeon(int roomNumber, Player* character)
 {
-	int 
+	int invalidActions = 0;
+	string choice;
+
+	if (dungeon[roomNumber].isDoorOpen == false) 
+	{
+		dungeon[roomNumber].choiceText[6] = "";
+	}
+
+	if (character->inventory.size() == 0)
+	{
+		dungeon[roomNumber].choiceText[1] = "";
+		dungeon[roomNumber].choiceText[2] = "";
+		dungeon[roomNumber].choiceText[3] = "";
+		dungeon[roomNumber].choiceText[4] = "";
+	}
+	else if (character->inventory.size() >= 0)
+	{
+		if (character->isInventoryOpen == false)
+		{
+			dungeon[roomNumber].choiceText[1] = "";
+			dungeon[roomNumber].choiceText[2] = "";
+			dungeon[roomNumber].choiceText[3] = "";
+		}
+		if (character->isInventoryOpen == false)
+		{
+			dungeon[roomNumber].choiceText[0] = "";
+			dungeon[roomNumber].choiceText[5] = "";
+			dungeon[roomNumber].choiceText[4] = "Close Inventory";
+		}
+	}
+
 	cout << dungeon[roomNumber].fillerText[dungeon[roomNumber].textStage] << endl;
 	cout << endl;
 	cout << "You can ";
-	for (int i = 0; i < dungeon; i++)
+	for (int i = 0; i < dungeon[roomNumber].validCommands->length(); i++)
 	{
-		int x = dungeon[roomNumber].availaleActions.Length()
+		if (dungeon[roomNumber].choiceText[i] == "")
+		{
+			invalidActions++;
+		}
+		cout << i - invalidActions << ": " << dungeon[roomNumber].choiceText[i] << endl;
 	}
+
+	cout << "Please type one of your available options. Case doesn't matter" << endl;
+	getline(cin, choice);
+	SplitChoice(choice,roomNumber);
 }
+void PrintInventory(int roomNumber, Player* character)
+{
+	int invalidActions = 0;
+	cout << endl;
+	cout << "---------------------------------------------------------------" << endl;
+	cout << "Inventory" << endl;
+	for (int i = 0; i < dungeon[roomNumber].validCommands->length(); i++)
+	{
+
+
+	}
+
+	for (int i = 0; i < dungeon[roomNumber].validCommands->length(); i++)
+	{
+		if (dungeon[roomNumber].choiceText[i] == "")
+		{
+			invalidActions++;
+		}
+		cout << i - invalidActions << ": " << dungeon[roomNumber].choiceText[i] << endl;
+	}
+
+}
+
 
 void SplitChoice(string decision, int roomNum)
 {
@@ -320,7 +387,7 @@ void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> it
 		item.pop();
 	} while (item.size() > 0);
 
-	for (int x = 0; x < classItem.validCommands->size();x++)
+	for (int x = 0; x < dungeon[roomNum].validCommands->size();x++)
 	{
 		if (enteredCommand == classItem.validCommands[x])
 		{
@@ -328,6 +395,33 @@ void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> it
 			{
 				command = new PickUp();
 				command->CommandUsed(character->inventory, enteredItem);
+			}
+			else if (x == 1)
+			{
+				command = new Drop();
+				command->CommandUsed(character->inventory, enteredItem);
+			}
+			else if (x == 2)
+			{
+				command = new Heal();
+				command->CommandUsed(character->inventory, enteredItem);
+			}
+			else if (x == 3)
+			{
+				command = new Equip();
+				command->CommandUsed(character->inventory, enteredItem);
+			}
+			else if (x == 4)
+			{
+				character->isInventoryOpen = true;
+			}
+			else if (x == 5)
+			{
+
+			}
+			else if (x == 6)
+			{
+				Dungeon(++roomNum, character);
 			}
 		}
 		else
