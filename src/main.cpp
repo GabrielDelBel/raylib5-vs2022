@@ -365,7 +365,6 @@ void PrintInventory(int roomNumber, Player* character)
 	for (int i = 0; i < character->inventory.size(); i++)
 	{
 		string savedItem;
-		cout << character->inventory.size();
 		savedItem = character->inventory.front();
 		cout << character->inventory.front() << endl;
 		character->inventory.pop_front();
