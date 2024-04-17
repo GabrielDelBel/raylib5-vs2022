@@ -256,7 +256,7 @@ void SetUpDungeon(string characterClass)
 		{
 			dungeon[i].isDoorOpen = false;
 		}
-		for (int j = 0; i < classItem.validCommands->length(); i++)
+		for (int j = 0; j < classItem.validCommands->length(); j++)
 		{
 			dungeon[i].validCommands[j] = classItem.validCommands[j];
 			dungeon[i].choiceText[j] = classItem.choiceText[j];
@@ -295,6 +295,7 @@ void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> it
 {
 	string enteredCommand;
 	string enteredItem;
+	int validchoice = 0;
 	do
 	{
 		enteredCommand += tolower(action.front());
@@ -311,6 +312,7 @@ void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> it
 	{
 		if (enteredCommand == classItem.validCommands[x])
 		{
+			validchoice++;
 			if (x == 0)
 			{
 				command = new PickUp();
@@ -343,7 +345,7 @@ void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> it
 			{
 				if (dungeon[roomNum].isDoorOpen == true)
 				{
-
+					Dungeon(++roomNum, character);
 				}
 				else
 				{
@@ -354,10 +356,16 @@ void ValidateCommandOrItem(Player* character, queue<char> action, queue<char> it
 		}
 		else
 		{
-			cout << "You did not choose a valid option." << endl;
+			
 		}
 	}
+	if (validchoice == 0)
+	{
+		cout << "You made an invalid choice" << endl;
+	}
+	
 }
+
 bool split = false;
 
 void SplitChoice(string decision, int roomNum)
@@ -432,29 +440,17 @@ void Dungeon(int roomNumber, Player* character)
 		{
 			invalidActions++;
 		}
-		cout << i - invalidActions << ": " << dungeon[roomNumber].choiceText[i] << endl;
+		if (i + 1 - invalidActions > 0)
+		{
+			cout << i + 1 - invalidActions << ": " << dungeon[roomNumber].choiceText[i] << endl;
+		}
+		
 	}
 
 	cout << "Please type one of your available options. Case doesn't matter" << endl;
 	getline(cin, choice);
 	SplitChoice(choice,roomNumber);
-	Dungeon(++roomNumber, character);
-}
-
-void ChooseClass(string chosenClass)
-{
-	if (chosenClass == "1")
-	{
-		player = new Wizard();
-		player->SetInitialHPAttackandClass();
-		SetUpDungeon("wizard");
-	}
-	else if (chosenClass == "2")
-	{
-		player = new Knight();
-		player->SetInitialHPAttackandClass();
-		SetUpDungeon("knight");
-	}
+	Dungeon(roomNumber, character);
 }
 
 void Battle(Player* character, Enemy* combattant )
@@ -471,20 +467,25 @@ int main()
 	cout << "Welcome To Gabriel's Amazing RPG" << endl;
 	cout << "You can either play as a Wizard or a Knight." << endl;
 	cout << "Please press 1 for Wizard or 2 for Knight." << endl;
-	getline(cin, decision);
 	do
 	{
+		getline(cin, decision);
 
 		if (decision == "1")
 		{
 			valid = true;
-			ChooseClass("1");
-
+			player = new Wizard();
+			player->SetInitialHPAttackandClass();
+			SetUpDungeon("wizard");
+			
 		}
 		else if (decision == "2")
 		{
+			player = new Knight();
+			player->SetInitialHPAttackandClass();
+			SetUpDungeon("knight");
 			valid = true;
-			ChooseClass("2");
+			
 		}
 		else
 		{
@@ -515,7 +516,7 @@ int main()
 	cout << "You've heard rumors that there's a treasure deep in the dungeon guarded by a monster who had been terrorizing the nearby town." << endl;
 	cout << "Who ever defeats the monster would become famous. As well as being able to claim the treasure." << endl;
 	cout << "You enter the dungeon." << endl;
-	dungeon[0];
+	Dungeon(0,player);
 
 
 
