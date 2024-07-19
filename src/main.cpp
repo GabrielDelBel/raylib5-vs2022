@@ -5,6 +5,7 @@
 #include <list>
 #include <queue>
 #include <cctype>
+#include "Room.h"
 using namespace std;
 
 class Room
