@@ -6,6 +6,7 @@
 #include <queue>
 #include <cctype>
 #include "Room.h"
+#include "Player_Enemy_Base.h"
 using namespace std;
 
 class Room
@@ -173,7 +174,7 @@ public:
 	
 };
 
-class Player : public GameObject
+class Player : public Player_Enemy_Base
 {
 public:
 	string name;

@@ -11,9 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Player_Enemy_Base.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Player_Enemy_Base.h" />
     <ClInclude Include="src\Room.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
