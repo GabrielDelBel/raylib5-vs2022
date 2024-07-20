@@ -165,33 +165,6 @@ class Equip : public Commands
 	}
 };
 
-class Player : public Player_Enemy_Base
-{
-public:
-	string name;
-	int health;
-	int attack;
-	bool isInventoryOpen;
-	string typeCharacter;
-	list<string> inventory;
-
-	int NormalAttack()
-	{
-		int randNum;
-		randNum = (rand() % 15) + 50;
-		cout << " dealt " << randNum << " damage to the ";
-		return randNum;
-	}
-
-	virtual void SetInitialHPAttackandClass() = 0;
-
-	virtual int SpecialAttack() = 0;
-
-	virtual void SetHP(int changeHealth) = 0;
-
-	virtual void SetAttack(int changeAttack) = 0;
-};
-
 Player* player;
 
 class Enemy : public Player_Enemy_Base

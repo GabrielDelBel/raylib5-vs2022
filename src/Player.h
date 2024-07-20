@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
 #include <list>
+#include "Player_Enemy_Base.h"
 
-class Player
+class Player : public Player_Enemy_Base
 {
 public:
 	std::string name;
