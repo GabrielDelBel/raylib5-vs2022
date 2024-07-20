@@ -164,16 +164,6 @@ class Equip : public Commands
 	}
 };
 
-
-
-class GameObject
-{
-public:
-	virtual int NormalAttack() = 0;
-	
-	
-};
-
 class Player : public Player_Enemy_Base
 {
 public:
@@ -203,7 +193,7 @@ public:
 
 Player* player;
 
-class Enemy : public GameObject
+class Enemy : public Player_Enemy_Base
 {
 public:
 	int health;
