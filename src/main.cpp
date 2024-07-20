@@ -7,6 +7,7 @@
 #include <cctype>
 #include "Room.h"
 #include "Player_Enemy_Base.h"
+#include "Player.h"
 using namespace std;
 
 class Room
