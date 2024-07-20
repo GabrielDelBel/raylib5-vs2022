@@ -8,6 +8,7 @@
 #include "Room.h"
 #include "Player_Enemy_Base.h"
 #include "Player.h"
+#include "Enemy.h"
 using namespace std;
 
 class Room
@@ -166,26 +167,6 @@ class Equip : public Commands
 };
 
 Player* player;
-
-class Enemy : public Player_Enemy_Base
-{
-public:
-	int health;
-	int attack;
-	
-
-	int NormalAttack()
-	{
-		int randNum;
-		randNum = 1 + (rand() % 20 / 100) * attack;
-		cout << " dealt " << randNum << " damage to ";
-		return randNum;
-		
-	}
-
-	virtual void TauntPlayer() = 0;
-	
-};
 
 Enemy* enemy;
 
